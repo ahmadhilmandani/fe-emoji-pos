@@ -9,7 +9,7 @@ export default function LoginIndex() {
         <div className='relative z-10 w-full max-w-lg'>
           <LoginCard />
         </div>
-        <div className='absolute w-full h-[40vh] bottom-0 left-0 right-0 bg-gradient-to-br from-yellow-200 via-yellow-500 to-amber-500 blur-[200px] opacity-30 pointer-events-none z-[1]'></div>
+        <div className='absolute w-full h-[40vh] bottom-0 left-0 right-0 bg-gradient-to-br from-yellow-200 via-yellow-300 to-amber-300 blur-[200px] opacity-30 pointer-events-none z-[1]'></div>
       </div>
     </>
   )
