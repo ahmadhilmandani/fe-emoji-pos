@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router";
+import LoginIndex from "../pages/Login/Index";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="text-red-200 text-2xl">Hello World</div>,
+    Component: LoginIndex,
   },
 ]);
