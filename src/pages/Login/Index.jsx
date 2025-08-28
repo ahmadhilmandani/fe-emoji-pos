@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png"
 export default function LoginIndex() {
   return (
     <>
-      <div className='bg-white dark:bg-dark w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden py-10 px-4'>
+      <div className='bg-white w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden py-10 px-4'>
         <img src={logo} alt="Logo of Mental Butler" className="mx-auto w-48 mb-12" />
         <div className='relative z-10 w-full max-w-lg'>
           <LoginCard />

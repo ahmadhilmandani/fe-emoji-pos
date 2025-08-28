@@ -14,8 +14,6 @@ export default function LoginCard() {
 
   const navigate = useNavigate()
 
-
-
   return (
     <>
       <Card>
@@ -26,7 +24,7 @@ export default function LoginCard() {
           <small className="text-gray-500 mx-auto text-center block">Sebelumnya, login terlebih dahulu, ya!</small>
         </div>
         <div className="mt-5">
-          <Input onChangeProp={setEmailOrUsername} labelProp={'Email atau Username'} placeholderProp={'cth: username; user@gmail.com'} typeProp={'text'} inputId={'emailOrUsername'} />
+          <Input onChangeProp={setEmailOrUsername} labelProp={'Email'} placeholderProp={'cth: username; user@gmail.com'} typeProp={'text'} inputId={'emailOrUsername'} />
         </div>
         <div className="mt-5">
           <Input onChangeProp={setPassword} labelProp={'Password'} placeholderProp={'·········'} typeProp={'password'} inputId={'password'} />
@@ -41,10 +39,10 @@ export default function LoginCard() {
         </div>
 
         <div className="flex gap-1 justify-center items-center">
-          <div className="dark:text-light text-dark">
-            Belum punya akun?
+          <div className="text-[13px] text-gray-500">
+            Ingin Mendaftar Toko?
           </div>
-          <Link to={'/register'} className="font-semibold link-primary-color">Daftar di Sini!</Link>
+          <Link to={'/register-store'} className="font-semibold text-[13px] text-gray-500 hover:text-yellow-600 transition-all">Klik di Sini!</Link>
         </div>
       </Card>
     </>
