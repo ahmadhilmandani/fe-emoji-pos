@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import RegisterUserSection from "./UserSection";
 import RegisterStoreSection from "./StoreSection";
 import RegisterConfirmSection from "./ConfirmSection";
+import { postRegisterStore } from "../../../api/postRegister";
+import ErrorToastMsg from "../../../components/ErrorToastMsg";
 
 export default function RegisterCard() {
   const [stepNum, setStepNum] = useState(1)
@@ -20,7 +22,7 @@ export default function RegisterCard() {
   const age = useSelector((state) => state.registerStoreSlice.age)
   const sex = useSelector((state) => state.registerStoreSlice.sex)
   const phone = useSelector((state) => state.registerStoreSlice.phone)
-  
+
 
   const nameStore = useSelector((state) => state.registerStoreSlice.nameStore)
   const addressStore = useSelector((state) => state.registerStoreSlice.addressStore)
@@ -33,17 +35,21 @@ export default function RegisterCard() {
   }
 
   const handleNextStep = () => {
-    console.log(name)
-    console.log(password)
-    console.log(email)
-    console.log(age)
-    console.log(sex)
-    console.log(phone)
-    
-    console.log(nameStore)
-    console.log(addressStore)
-    console.log(phoneStore)
+    if (stepNum == 1) {
+      if (!name || !password || !email) {
+        return toast.error(<ErrorToastMsg />)
+      }
 
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email && !emailRegex.test(email)) {
+        return toast.error("Format Email Salah")
+      }
+    }
+    if (stepNum == 2) {
+      if (!nameStore || !addressStore || !phoneStore) {
+        return toast.error(<ErrorToastMsg />)
+      }
+    }
     if (stepNum == 3) {
       handleRegis()
     } else {
@@ -52,8 +58,24 @@ export default function RegisterCard() {
   }
 
   const handleRegis = async () => {
-
-
+    try {
+      await postRegisterStore({
+        name,
+        password,
+        email,
+        age: age || null,
+        sex: sex || null,
+        phone: phone || null,
+        store_name: nameStore,
+        store_address: addressStore,
+        store_phone: phoneStore
+      })
+      toast.success('Berhasil Daftar, Silahkan Login!')
+      navigate('/')
+    } catch (error) {
+      console.log(error.response.data)
+      toast.error(error.response.data.msg)
+    }
   }
 
 

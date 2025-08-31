@@ -27,10 +27,10 @@ export default function RegisterUserSection() {
           <Input valueProp={password} labelProp='password' placeholderProp='Password' typeProp='password' inputId='password' onChangeProp={(e) => { dispatch(setPassword(e)) }} />
         </div>
         <div className="min-w-[280px] flex-1">
-          <Input valueProp={phone} labelProp='No. Hp' placeholderProp='081231xxxxxx' typeProp='text' inputId='phone' onChangeProp={(e) => { dispatch(setPhone(e)) }} />
+          <Input isRequired={false} valueProp={phone} labelProp='No. Hp' placeholderProp='081231xxxxxx' typeProp='text' inputId='phone' onChangeProp={(e) => { dispatch(setPhone(e)) }} />
         </div>
         <div className="min-w-[100px] flex-1">
-          <Input valueProp={age} labelProp='Umur' placeholderProp='10' typeProp='number' inputId='umur' onChangeProp={(e) => { dispatch(setAge(e)) }} />
+          <Input isRequired={false} valueProp={age} labelProp='Umur' placeholderProp='10' typeProp='number' inputId='umur' onChangeProp={(e) => { dispatch(setAge(e)) }} />
         </div>
         <div className="min-w-[100px] flex-1">
           <div className="block mb-2 text-sm font-medium text-dark">
