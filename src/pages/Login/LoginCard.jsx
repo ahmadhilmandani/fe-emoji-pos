@@ -3,16 +3,28 @@ import Input from "../../components/Input";
 import { Link, useNavigate } from "react-router";
 import Button from "../../components/Button"
 import { useState } from "react";
-// import { fetchLogin } from "../../api/fetchLogin";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setButtonLoader } from "../../redux/slices/loaderSlice";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { postLogin } from "../../api/postLogin";
 
 export default function LoginCard() {
-  const [emailOrUsername, setEmailOrUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    try {
+      const res = await postLogin({
+        password,
+        email,
+      })
+      toast.success('Berhasil Daftar, Silahkan Login!')
+      // navigate('/')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
+  }
+
 
   return (
     <>
@@ -24,7 +36,7 @@ export default function LoginCard() {
           <small className="text-gray-500 mx-auto text-center block">Sebelumnya, login terlebih dahulu, ya!</small>
         </div>
         <div className="mt-5">
-          <Input onChangeProp={setEmailOrUsername} labelProp={'Email'} placeholderProp={'cth: username; user@gmail.com'} typeProp={'text'} inputId={'emailOrUsername'} />
+          <Input onChangeProp={setEmail} labelProp={'Email'} placeholderProp={'cth: username; user@mail.test'} typeProp={'text'} inputId={'email'} />
         </div>
         <div className="mt-5">
           <Input onChangeProp={setPassword} labelProp={'Password'} placeholderProp={'·········'} typeProp={'password'} inputId={'password'} />
@@ -32,7 +44,7 @@ export default function LoginCard() {
 
         <div className="my-5">
 
-          <Button buttonType="primary" isExtend={true}>
+          <Button onClickProp={handleLogin} buttonType="primary" isExtend={true}>
             Login
           </Button>
 
