@@ -5,12 +5,15 @@ import Button from "../../components/Button"
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { postLogin } from "../../api/postLogin";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../redux/slice/userInfoSlice";
 
 export default function LoginCard() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleLogin = async () => {
     try {
@@ -18,8 +21,15 @@ export default function LoginCard() {
         password,
         email,
       })
-      toast.success('Berhasil Daftar, Silahkan Login!')
-      // navigate('/')
+      console.log(res)
+      toast.success(`Selamat Datang Kembali, ${res.data.user.name}!` )
+      dispatch(setUserInfo({
+        id: res.data.user.id,
+        name: res.data.user.name,
+        email: res.data.user.email,
+        role: res.data.user.role,
+      }))
+      navigate('/')
     } catch (error) {
       toast.error(error.response.data.msg)
     }
