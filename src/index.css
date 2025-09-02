@@ -99,15 +99,15 @@
   }
 
   h1 {
-    @apply text-2xl leading-[160%] tracking-[0.15px];
+    @apply text-5xl leading-[160%] tracking-[0.15px];
   }
 
   h2 {
-    @apply text-xl leading-[160%] tracking-[0.15px];
+    @apply text-4xl leading-[160%] tracking-[0.15px];
   }
 
   h3 {
-    @apply text-lg leading-[160%] tracking-[0.15px];
+    @apply text-3xl leading-[160%] tracking-[0.15px];
   }
 
   p {
