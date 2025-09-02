@@ -1,15 +1,21 @@
-import { IconDots, IconSearch } from "@tabler/icons-react";
+import { IconDots, IconPlus, IconSearch } from "@tabler/icons-react";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { useNavigate } from "react-router";
 
 export default function ProductIndex() {
+  const navigate = useNavigate()
+
   return (
-    <div className={``}>
+    <div>
       <header className="flex justify-between items-center gap-5">
         <h1>Produk</h1>
-        <Button buttonType={'primary'}>
-          Tambah +
+        <Button buttonType={'primary'} onClickProp={() => {
+          navigate('/product/add')
+        }}>
+          Tambah
+          <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
         </Button>
       </header>
       <div>
