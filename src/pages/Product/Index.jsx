@@ -1,4 +1,4 @@
-import { IconDots, IconPlus, IconSearch } from "@tabler/icons-react";
+import { IconDots, IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react";
 import Badge from "../../components/Badge";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -47,26 +47,26 @@ export default function ProductIndex() {
             </Badge>
           </div>
         </div>
-        <div className="relative overflow-x-auto rounded-b-lg border border-gray-200">
-          <table className="w-full text-left rtl:text-right text-gray-500">
-            <thead className="text-gray-700 uppercase bg-white border-b border-gray-200">
+        <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
+          <table className="min-w-[320px] w-full text-left rtl:text-right">
+            <thead className="uppercase border-b border-gray-200">
               <tr>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   Nama
                 </th>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   Tipe
                 </th>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   Harga
                 </th>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   Stock
                 </th>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   Satuan
                 </th>
-                <th scope="col" className="px-6 py-4 text-gray-500">
+                <th scope="col" className="px-6 py-4 font-bold">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -75,23 +75,43 @@ export default function ProductIndex() {
               <tr className="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   Apple MacBook Pro 17"
+                  Apple MacBook Pro 17"
+                  Apple MacBook Pro 17"
+                  Apple MacBook Pro 17"
                 </th>
                 <td className="px-6 py-4">
+                  Silver
+                  Silver
                   Silver
                 </td>
                 <td className="px-6 py-4">
                   Laptop
+                  Laptop
+                  Laptop
+                  Laptop
                 </td>
                 <td className="px-6 py-4">
+                  $2999
+                  $2999
                   $2999
                 </td>
                 <td className="px-6 py-4">
                   $2999
+                  $2999
                 </td>
-                <td className="px-6 py-4 text-right">
-                  <div className="w-10 p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-gray-50">
-                    <IconDots size={16} />
-                  </div>
+                <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
+                  <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all">
+                    <IconEye className="group-hover:-translate-y-0.5 transition-all stroke-amber-500" stroke={1.2} size={22} />
+                    Detail
+                  </button>
+                  <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:cursor-pointer transition-all">
+                    <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-purple-500" stroke={1.2} size={22} />
+                    Edit
+                  </button>
+                  <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:cursor-pointer transition-all">
+                    <IconEraser className="group-hover:-translate-y-0.5 transition-all stroke-rose-500" stroke={1.2} size={22} />
+                    Hapus
+                  </button>
                 </td>
               </tr>
             </tbody>
