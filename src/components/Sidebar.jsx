@@ -10,7 +10,7 @@ export default function Sidebar() {
         <IconLayoutDashboard />
         Dashboard
       </Link>
-      <Link className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
+      <Link to={'/product'} className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
         <IconPackage />
         Produk
       </Link>
@@ -18,7 +18,7 @@ export default function Sidebar() {
         <IconPackages />
         Bahan Baku
       </Link>
-      <Link className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
+      <Link to={'/supplier'} className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
         <IconPhoneRinging />
         Supplier
       </Link>

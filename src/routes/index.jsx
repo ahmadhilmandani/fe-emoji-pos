@@ -4,6 +4,8 @@ import RegisterStoreIndex from "../pages/Register/Store/Index";
 import MainLayout from "../layouts/MainLayout";
 import ProductIndex from "../pages/Product/Index";
 import ProductAdd from "../pages/Product/Add";
+import SupplierIndex from "../pages/Supplier/Index";
+import SupplierAdd from "../pages/Supplier/Add";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ export const router = createBrowserRouter([
       {
         path: 'product/add',
         element: <ProductAdd />
+      },
+      {
+        path: 'supplier',
+        element: <SupplierIndex />
+      },
+      {
+        path: 'supplier/add',
+        element: <SupplierAdd />
       },
     ]
   },
