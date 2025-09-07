@@ -33,7 +33,6 @@ export default function ProductIndex() {
   } else {
     return (
       <div>
-
         <header className="flex justify-between items-center gap-5">
           <h1>Produk</h1>
           <Button buttonType={'primary'} onClickProp={() => {

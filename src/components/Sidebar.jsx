@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 import LogoPos from "../assets/logo.png"
-import { IconCashBanknote, IconChevronDown, IconCoin, IconLayoutDashboard, IconPackage, IconPackages, IconPhoneRinging, IconPoint, IconReport } from "@tabler/icons-react"
+import { IconCashBanknote, IconChevronDown, IconCoin, IconLayoutDashboard, IconPackage, IconPackages, IconPhoneRinging, IconPoint, IconReport, IconUsers } from "@tabler/icons-react"
 
 export default function Sidebar() {
   return (
@@ -49,6 +49,10 @@ export default function Sidebar() {
           Pembelian
         </div>
       </div>
+      <Link to={'/users'} className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
+        <IconUsers />
+        Pengguna
+      </Link>
     </aside>
   )
 }
