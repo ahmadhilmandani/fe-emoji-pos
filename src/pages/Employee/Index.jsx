@@ -8,7 +8,7 @@ import { getAllUserInfo } from "../../api/getAllUserInfo"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
-export default function UserIndex() {
+export default function EmployeeIndex() {
   const [isLoading, setIsLoading] = useState(true)
   const [dataUsersInfo, setDataUsersInfo] = useState()
   const navigate = useNavigate()
@@ -34,9 +34,9 @@ export default function UserIndex() {
     <>
       <div>
         <header className="flex justify-between items-center gap-5">
-          <h1>Pengguna</h1>
+          <h1>Karyawan</h1>
           <Button buttonType={'primary'} onClickProp={() => {
-            navigate('/product/add')
+            navigate('/employee/add')
           }}>
             Tambah
             <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
