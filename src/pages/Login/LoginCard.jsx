@@ -28,6 +28,7 @@ export default function LoginCard() {
         name: res.data.user.name,
         email: res.data.user.email,
         role: res.data.user.role,
+        storeId: res.data.user.store_id
       }))
       navigate('/')
     } catch (error) {

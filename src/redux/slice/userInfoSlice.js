@@ -7,6 +7,7 @@ export const userInfoSlie = createSlice({
     name: '',
     email: '',
     role: '',
+    storeId: '',
   },
   reducers: {
     setUserInfo: (state, action) => {
@@ -14,6 +15,7 @@ export const userInfoSlie = createSlice({
       state.name = action.payload.name
       state.email = action.payload.email
       state.role = action.payload.role
+      state.storeId = action.payload.storeId
     }
   }
 })
