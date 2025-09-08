@@ -103,10 +103,10 @@ export default function ProductIndex() {
                         {val.name}
                       </th>
                       <td className="px-6 py-4">
-                        {val.type}
+                        {val.type == 'produk_jadi' ? 'Produk Jadi' : val.type == 'produk_jadi' ? 'Olahan' : 'Layanan'}
                       </td>
                       <td className="px-6 py-4">
-                        {val.price}
+                        Rp. {val.price}
                       </td>
                       <td className="px-6 py-4">
                         {val.stock}

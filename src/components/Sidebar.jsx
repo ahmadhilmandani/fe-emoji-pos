@@ -6,7 +6,7 @@ export default function Sidebar() {
   return (
     <aside className={`lg:w-[280px] xl:w-[320px] sticky h-screen z-10 left-0 top-0 bottom-0 bg-white border border-gray-200 p-4`}>
       <img src={LogoPos} alt="" className="h-20 mb-6" />
-      <Link className="hover:bg-yellow-50 transition-all bg-yellow-300 flex gap-3 items-center p-3">
+      <Link className="hover:bg-yellow-50 transition-all bg-yellow-100 font-bold rounded-xl flex gap-3 items-center p-3">
         <IconLayoutDashboard />
         Dashboard
       </Link>

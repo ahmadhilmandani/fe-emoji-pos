@@ -7,30 +7,30 @@ import Card from "../../components/Card";
 import { postProduct } from "../../api/postProduct";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function ProductAdd() {
-  const [storeId, setStoreId] = useState()
   const [name, setName] = useState()
-  const [typeProduct, setTypeProduct] = useState()
+  const [typeProduct, setTypeProduct] = useState('produk_jadi')
   const [price, setPrice] = useState()
   const [stock, setStock] = useState()
   const [unit, setUnit] = useState()
-
   const [isLoading, setIsLoading] = useState(false)
+
   const navigate = useNavigate()
+  const userInfo = useSelector((state) => { return state.userInfoSlie })
 
   const submitProduct = async () => {
     setIsLoading(true)
     try {
       const payload = {
-        store_id: storeId,
+        store_id: userInfo.storeId,
         name: name,
         type: typeProduct,
         price: price,
         stock: stock,
         unit: unit
       }
-      // return console.log(payload)
       await postProduct(payload)
       toast.success('Berhasil Menambah Produk')
       navigate('/product')
@@ -72,7 +72,7 @@ export default function ProductAdd() {
             </div>
             <div className="min-w-[270px] flex-1">
               <label htmlFor={'tipe'} className="block mb-2 text-sm font-medium text-dark">Tipe<span className="text-red-500 inline-block ml-1">*</span></label>
-              <select onChange={(e)=>{setTypeProduct(e.target.value)}} value={typeProduct} name="tipe" id="tipe" className="block w-full p-2 text-dark rounded-lg bg-gray-50 outline outline-gray-300 text-sm focus:outline-amber-500 transition-all">
+              <select onChange={(e) => { setTypeProduct(e.target.value) }} value={typeProduct} name="tipe" id="tipe" className="block w-full p-2 text-dark rounded-lg bg-gray-50 outline outline-gray-300 text-sm focus:outline-amber-500 transition-all">
                 <option value="produk_jadi" className="">Jadi</option>
                 <option value="produk_olahan" className="">Olahan</option>
                 <option value="layanan" className="">Layanan</option>
