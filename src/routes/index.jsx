@@ -8,6 +8,8 @@ import SupplierIndex from "../pages/Supplier/Index";
 import SupplierAdd from "../pages/Supplier/Add";
 import EmployeeIndex from "../pages/Employee/Index";
 import EmployeeAdd from "../pages/Employee/Add";
+import IndgredientIndex from "../pages/Ingredient/Index";
+import IngredientAdd from "../pages/Ingredient/Add";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: 'employee/add',
         element: <EmployeeAdd />
+      },
+      {
+        path: 'ingredient',
+        element: <IndgredientIndex />
+      },
+      {
+        path: 'ingredient/add',
+        element: <IngredientAdd />
       },
     ]
   },

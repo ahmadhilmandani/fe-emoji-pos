@@ -14,7 +14,7 @@ export default function Sidebar() {
         <IconPackage />
         Produk
       </Link>
-      <Link className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
+      <Link to={'/ingredient'} className="hover:bg-yellow-50 transition-all flex gap-3 items-center mt-6 p-3 text-gray-500">
         <IconPackages />
         Bahan Baku
       </Link>
