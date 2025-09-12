@@ -65,7 +65,7 @@ export default function ProductAdd() {
 
   const handleChooseIngredient = (e) => {
     let isAlreadyChoose = false
-    const [id, name, unit] = e.target.value.split('@')
+    const [id, name, unit, stockLeft] = e.target.value.split('@')
     selectedIngredients.forEach((val) => {
       if (val.id == id) {
         toast.error('Bahan Baku Sudah Ditambahkan')
@@ -73,7 +73,7 @@ export default function ProductAdd() {
       }
     })
     if (!isAlreadyChoose) {
-      setSelectedIngredients([...selectedIngredients, { id: id, name: name, qty: null, unit: unit }])
+      setSelectedIngredients([...selectedIngredients, { id: id, name: name, qty: null, unit: unit, stockLeft }])
     }
   }
 
@@ -155,7 +155,7 @@ export default function ProductAdd() {
                         ingredients?.map((val) => {
                           return (
                             <>
-                              <option value={`${val.id}@${val.name}@${val.unit}`} className="" disabled={val.stock <= val.min_stock}>
+                              <option value={`${val.id}@${val.name}@${val.unit}@${val.stock}`} className="" disabled={val.stock <= val.min_stock}>
                                 {val.name}
                                 {val.stock <= val.min_stock ? <small className="text-[13px]"> (<span className="text-[13px] font-black">Stock</span> Kurang Dari <span className="text-[13px] font-black">Min. Stock</span>)</small> : ''}
                               </option>
@@ -186,6 +186,14 @@ export default function ProductAdd() {
                             </div>
                             <div className="min-w-[270px] flex-1 bg-red-">
                               {val.name}
+                            </div>
+                            <div className="max-w-xs flex-1">
+                              <label htmlFor={'qty'} className="block mb-2 text-sm font-medium text-dark">
+                                Sisa Stock ({val.unit})
+                              </label>
+                              <div className="relative flex items-center">
+                                {val.stockLeft}
+                              </div>
                             </div>
                             <div className="max-w-xs flex-1">
                               <label htmlFor={'qty'} className="block mb-2 text-sm font-medium text-dark">
