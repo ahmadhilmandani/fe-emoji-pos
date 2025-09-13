@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import { postIngredients } from "../../api/postIngredients"
@@ -8,15 +8,28 @@ import Card from "../../components/Card"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import ErrorToastMsg from "../../components/ErrorToastMsg"
+import { getSupplier } from "../../api/getSupplier"
 
 export default function IngredientAdd() {
   const [name, setName] = useState()
   const [stock, setStock] = useState()
   const [minStock, setMinStock] = useState()
   const [unit, setUnit] = useState()
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const userInfo = useSelector((state) => { return state.userInfoSlie })
+
+  const getAllSupplier = async () => {
+    try {
+      const res = await getSupplier()
+      console.log(res.data.supplier)
+      // setSupplierData(res.data.supplier)
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleSubmitIngredient = async () => {
     if (!name || !stock || !minStock || !unit) {
@@ -41,6 +54,10 @@ export default function IngredientAdd() {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    getAllSupplier()
+  }, [])
 
   const navigate = useNavigate()
 
