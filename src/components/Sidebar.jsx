@@ -56,7 +56,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div className={`ml-6 border-l-4 border-gray-300 ${clickedState == SIDEBAR_LIST.PRODUK_OLAHAN ? 'h-[175.182px]' : 'h-0'} overflow-hidden transition-all`}>
-          <Link className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+          <Link to={'/processed-product'} className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
             Katalog
           </Link>
           <div>

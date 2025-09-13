@@ -1,21 +1,21 @@
 import { IconDots, IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react";
-import Badge from "../../components/Badge";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import Badge from "../../../components/Badge";
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getProduct } from "../../api/getProduct";
+import { getProduct } from "../../../api/getProduct";
 import { toast } from "react-toastify";
-import ProductIndexLoading from "./Component/IndexLoading";
+import ProductIndexLoading from "../Component/IndexLoading";
 
-export default function ProductIndex() {
+export default function ProcessedProductIndex() {
   const [isLoading, setIsLoading] = useState(true)
   const [dataProducts, setDataProducts] = useState()
   const navigate = useNavigate()
 
   const getProducts = async () => {
     try {
-      const res = await getProduct()
+      const res = await getProduct("?type=produk_olahan")
       setDataProducts(res.data.products)
     } catch (error) {
       toast.error(error.response.data.msg)
@@ -34,9 +34,9 @@ export default function ProductIndex() {
     return (
       <div>
         <header className="flex justify-between items-center gap-5">
-          <h1>Produk</h1>
+          <h1>Produk Olahan</h1>
           <Button buttonType={'primary'} onClickProp={() => {
-            navigate('/product/add')
+            navigate('/processed-product/add')
           }}>
             Tambah
             <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
@@ -53,23 +53,6 @@ export default function ProductIndex() {
                 <IconSearch size={16} />
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <b>
-                Tipe
-              </b>
-              <Badge>
-                Semua Produk
-              </Badge>
-              <Badge>
-                Produk Jadi
-              </Badge>
-              <Badge>
-                Produk Olahan
-              </Badge>
-              <Badge badgeType={'primary'} >
-                Layanan
-              </Badge>
-            </div>
           </div>
           <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
             <table className="min-w-[320px] w-full text-left rtl:text-right">
@@ -79,13 +62,7 @@ export default function ProductIndex() {
                     Nama
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Tipe
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
                     Harga
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Stock
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
                     Satuan
@@ -103,13 +80,7 @@ export default function ProductIndex() {
                         {val.name}
                       </th>
                       <td className="px-6 py-4">
-                        {val.type == 'produk_jadi' ? 'Produk Jadi' : val.type == 'produk_jadi' ? 'Olahan' : 'Layanan'}
-                      </td>
-                      <td className="px-6 py-4">
                         Rp. {val.price}
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.stock}
                       </td>
                       <td className="px-6 py-4">
                         {val.unit}
