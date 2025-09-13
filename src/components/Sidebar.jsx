@@ -90,9 +90,9 @@ export default function Sidebar() {
             <IconChevronDown className={`${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'rotate-[0deg]' : 'rotate-[-90deg]'} transition-all`} />
           </div>
         </div>
-        <div className={`flex gap-3 items-center ml-6 border-l-4 border-gray-300 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500 ${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'h-[43.39px] px-8 py-3' : 'h-0 px-0 py-0'} overflow-hidden transition-all`}>
+        <Link to={'/service-product'} className={`flex gap-3 items-center ml-6 border-l-4 border-gray-300 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500 ${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'h-[43.39px] px-8 py-3' : 'h-0 px-0 py-0'} overflow-hidden transition-all`}>
           Katalog
-        </div>
+        </Link>
       </div>
       {/* Penjualan */}
       <Link className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">

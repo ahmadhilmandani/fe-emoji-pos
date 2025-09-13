@@ -12,6 +12,8 @@ import IndgredientIndex from "../pages/Ingredient/Index";
 import IngredientAdd from "../pages/Ingredient/Add";
 import PhysicalProductIndex from "../pages/PhysicalProduct/Catalog/Index";
 import PhysicalProductAdd from "../pages/PhysicalProduct/Catalog/Add";
+import ServiceProductIndex from "../pages/ServicePorduct/Catalog/Index";
+import ServiceProductAdd from "../pages/ServicePorduct/Catalog/Add";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ export const router = createBrowserRouter([
       {
         path: 'processed-product/add',
         element: <ProcessedProductAdd />
+      },
+      {
+        path: 'service-product',
+        element: <ServiceProductIndex />
+      },
+      {
+        path: 'service-product/add',
+        element: <ServiceProductAdd />
       },
       {
         path: 'supplier',
