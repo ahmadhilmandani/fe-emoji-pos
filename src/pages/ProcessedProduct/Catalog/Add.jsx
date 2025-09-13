@@ -127,8 +127,8 @@ export default function ProcessedProductAdd() {
 
           <div className="flex gap-8 items-center flex-wrap mb-3">
             <div className="min-w-[270px] flex-1">
-              <label htmlFor={'tipe'} className="block mb-2 text-sm font-medium text-dark">Bahan Baku<span className="text-red-500 inline-block ml-1">*</span></label>
-              <select onChange={(e) => { handleChooseIngredient(e) }} name="tipe" id="tipe" className="block w-full p-2 text-dark rounded-lg bg-gray-50 outline outline-gray-300 text-sm focus:outline-amber-500 transition-all">
+              <label htmlFor={'ingredient'} className="block mb-2 text-sm font-medium text-dark">Bahan Baku<span className="text-red-500 inline-block ml-1">*</span></label>
+              <select onChange={(e) => { handleChooseIngredient(e) }} name="ingredient" id="ingredient" className="block w-full p-2 text-dark rounded-lg bg-gray-50 outline outline-gray-300 text-sm focus:outline-amber-500 transition-all">
                 <option value={''} >
                   Pilih
                 </option>
