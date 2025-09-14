@@ -21,7 +21,7 @@ export default function LoginCard() {
         password,
         email,
       })
-      console.log(res)
+      localStorage.setItem('token', res.data.user.token)
       toast.success(`Selamat Datang Kembali, ${res.data.user.name}!` )
       dispatch(setUserInfo({
         id: res.data.user.id,

@@ -7,28 +7,34 @@ import { postProduct } from "../../../api/postProduct";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import ErrorToastMsg from "../../../components/ErrorToastMsg";
 
 export default function PhysicalProductAdd() {
   const [name, setName] = useState()
   const [price, setPrice] = useState()
+  const [minStock, setMinStock] = useState()
   const [unit, setUnit] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const userInfo = useSelector((state) => { return state.userInfoSlie })
 
   const submitProduct = async () => {
+    if (!name || !price || !minStock || !unit) {
+      return toast.error(<ErrorToastMsg />)
+    }
     setIsLoading(true)
     try {
       const payload = {
         store_id: userInfo.storeId,
         name: name,
         type: 'produk_fisik',
+        phys_prod_min_stock: minStock,
         price: price,
         unit: unit
       }
       await postProduct(payload)
       toast.success('Berhasil Menambah Produk')
-      navigate('/product')
+      navigate('/physical-product')
     } catch (error) {
       toast.error(error.response.data.msg)
     } finally {
@@ -50,7 +56,10 @@ export default function PhysicalProductAdd() {
         <Card isExtend={true}>
           <div className="flex gap-8 items-center flex-wrap mb-8">
             <div className="min-w-[270px] flex-1">
-              <Input onChangeProp={setName} labelProp={'Nama'} placeholderProp={'cth: Sepatu Lari'} typeProp={'text'} inputId={'email'} valueProp={name} />
+              <Input onChangeProp={setName} labelProp={'Nama'} placeholderProp={'cth: Sepatu Lari'} typeProp={'text'} inputId={'name'} valueProp={name} />
+            </div>
+            <div className="min-w-[270px] flex-1">
+              <Input onChangeProp={setMinStock} labelProp={'Min. Stock'} placeholderProp={'cth: 500'} typeProp={'number'} inputId={'min_stock'} valueProp={minStock} />
             </div>
           </div>
           <div className="flex gap-8 items-center flex-wrap mb-8">

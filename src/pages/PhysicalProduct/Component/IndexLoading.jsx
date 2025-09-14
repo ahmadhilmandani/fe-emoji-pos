@@ -26,23 +26,6 @@ export default function PhysicalProductIndexLoading() {
 
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <b>
-              Tipe
-            </b>
-            <div className="w-[80px] h-[32px] bg-slate-100 animate-pulse rounded-full">
-
-            </div>
-            <div className="w-[80px] h-[32px] bg-slate-100 animate-pulse rounded-full">
-
-            </div>
-            <div className="w-[80px] h-[32px] bg-slate-100 animate-pulse rounded-full">
-
-            </div>
-            <div className="w-[80px] h-[32px] bg-slate-100 animate-pulse rounded-full">
-
-            </div>
-          </div>
         </div>
         <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
           <table className="min-w-[320px] w-full text-left rtl:text-right">
@@ -52,13 +35,13 @@ export default function PhysicalProductIndexLoading() {
                   Nama
                 </th>
                 <th scope="col" className="px-6 py-4 font-bold">
-                  Tipe
-                </th>
-                <th scope="col" className="px-6 py-4 font-bold">
                   Harga
                 </th>
                 <th scope="col" className="px-6 py-4 font-bold">
                   Stock
+                </th>
+                <th scope="col" className="px-6 py-4 font-bold">
+                  Min. Stock
                 </th>
                 <th scope="col" className="px-6 py-4 font-bold">
                   Satuan
@@ -86,10 +69,6 @@ export default function PhysicalProductIndexLoading() {
                   <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
-                  </div>
-                </td>
                 <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
                   <div className="w-[80px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>
@@ -116,10 +95,6 @@ export default function PhysicalProductIndexLoading() {
                   <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
-                  </div>
-                </td>
                 <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
                   <div className="w-[80px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>
@@ -134,10 +109,6 @@ export default function PhysicalProductIndexLoading() {
                   <div className="w-[320px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>
                 </th>
-                <td className="px-6 py-4">
-                  <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
-                  </div>
-                </td>
                 <td className="px-6 py-4">
                   <div className="w-[100px] h-[24px] bg-slate-100 animate-pulse rounded-full">
                   </div>

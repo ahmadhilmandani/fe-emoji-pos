@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router"
 import LogoPos from "../assets/logo.png"
 import { IconChevronDown, IconCoin, IconCup, IconHeartSpark, IconLayoutDashboard, IconLemon, IconShirt, IconUsers } from "@tabler/icons-react"
 import { useState } from "react"
@@ -16,15 +16,14 @@ export default function Sidebar() {
     <aside className={`lg:w-[280px] xl:w-[320px] sticky h-screen z-10 left-0 top-0 bottom-0 bg-white border border-gray-200 p-4`}>
       <img src={LogoPos} alt="" className="h-20 mb-3" />
       {/* dashboard */}
-      <Link className="hover:bg-yellow-50 transition-all bg-yellow-100 font-bold rounded-xl flex gap-3 items-center p-3">
+      <NavLink to={'/'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconLayoutDashboard />
         Dashboard
-      </Link>
-      {/* produk fisik */}
+      </NavLink>
       <div className="mt-3">
         <div className="p-3 flex items-center gap-3 text-gray-500 group hover:bg-gray-100 hover:cursor-pointer transition-all" onClick={() => {
-        setClickedState(clickedState == SIDEBAR_LIST.PRODUK_FISIK ? null : SIDEBAR_LIST.PRODUK_FISIK)
-      }}>
+          setClickedState(clickedState == SIDEBAR_LIST.PRODUK_FISIK ? null : SIDEBAR_LIST.PRODUK_FISIK)
+        }}>
           <IconShirt />
           <div className="mr-auto">
             Produk Fisik
@@ -34,9 +33,10 @@ export default function Sidebar() {
           </div>
         </div>
         <div className={`ml-6 border-l-4 border-gray-300 ${clickedState == SIDEBAR_LIST.PRODUK_FISIK ? 'h-[86.788px]' : 'h-0'} overflow-hidden transition-all`}>
-          <Link to={'/physical-product'} className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+          <NavLink to={'/physical-product'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}
+          >
             Katalog
-          </Link>
+          </NavLink>
           <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
             Pembelian
           </div>
@@ -56,20 +56,20 @@ export default function Sidebar() {
           </div>
         </div>
         <div className={`ml-6 border-l-4 border-gray-300 ${clickedState == SIDEBAR_LIST.PRODUK_OLAHAN ? 'h-[175.182px]' : 'h-0'} overflow-hidden transition-all`}>
-          <Link to={'/processed-product'} className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+          <NavLink to={'/processed-product'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
             Katalog
-          </Link>
+          </NavLink>
           <div>
-            <div className="flex gap-3 items-center pl-8 pr-3 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+            <div className="flex gap-3 items-center pl-8 pr-3 py-3 text-gray-500">
               <IconLemon />
               <div className="mr-auto">
                 Bahan Baku
               </div>
             </div>
             <div className="ml-12 border-l-4 border-gray-300">
-              <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+              <NavLink to={'/'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
                 Katalog
-              </div>
+              </NavLink>
               <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
                 Pembelian
               </div>
@@ -90,9 +90,11 @@ export default function Sidebar() {
             <IconChevronDown className={`${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'rotate-[0deg]' : 'rotate-[-90deg]'} transition-all`} />
           </div>
         </div>
-        <Link to={'/service-product'} className={`flex gap-3 items-center ml-6 border-l-4 border-gray-300 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500 ${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'h-[43.39px] px-8 py-3' : 'h-0 px-0 py-0'} overflow-hidden transition-all`}>
+        <NavLink to={'/service-product'}
+          className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3 ml-6 border-l-4 border-gray-300" : `flex gap-3 items-center ml-6 border-l-4 border-gray-300 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500 ${clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? 'h-[43.39px] px-8 py-3' : 'h-0 px-0 py-0'} overflow-hidden transition-all`)}
+        >
           Katalog
-        </Link>
+        </NavLink>
       </div>
       {/* Penjualan */}
       <Link className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">

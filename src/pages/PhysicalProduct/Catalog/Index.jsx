@@ -65,6 +65,12 @@ export default function PhysicalProductIndex() {
                     Harga
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
+                    Stock
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-bold">
+                    Min. Stock
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-bold">
                     Satuan
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
@@ -81,6 +87,12 @@ export default function PhysicalProductIndex() {
                       </th>
                       <td className="px-6 py-4">
                         Rp. {val.price}
+                      </td>
+                      <td className="px-6 py-4">
+                        {val.stock ? val.stock : 0}
+                      </td>
+                      <td className="px-6 py-4">
+                        {val.phys_prod_min_stock}
                       </td>
                       <td className="px-6 py-4">
                         {val.unit}
