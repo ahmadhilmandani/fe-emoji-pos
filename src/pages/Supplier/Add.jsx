@@ -37,7 +37,7 @@ export default function SupplierAdd() {
     <div>
       <header className="flex items-center gap-5">
         <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {
-          navigate('/product')
+          navigate('/supplier')
         }}>
           <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
         </div>

@@ -14,6 +14,8 @@ import PhysicalProductIndex from "../pages/PhysicalProduct/Catalog/Index";
 import PhysicalProductAdd from "../pages/PhysicalProduct/Catalog/Add";
 import ServiceProductIndex from "../pages/ServicePorduct/Catalog/Index";
 import ServiceProductAdd from "../pages/ServicePorduct/Catalog/Add";
+import PurchasePhysicalProductIndex from "../pages/PhysicalProduct/Purchase/Index";
+import PurchasePhysicalProductAdd from "../pages/PhysicalProduct/Purchase/Add";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: 'physical-product/add',
         element: <PhysicalProductAdd />
+      },
+      {
+        path: 'purchase-physical-product',
+        element: <PurchasePhysicalProductIndex />
+      },
+      {
+        path: 'purchase-physical-product/add',
+        element: <PurchasePhysicalProductAdd />
       },
       {
         path: 'processed-product',

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router"
 import LogoPos from "../assets/logo.png"
-import { IconChevronDown, IconCoin, IconCup, IconHeartSpark, IconLayoutDashboard, IconLemon, IconShirt, IconUsers } from "@tabler/icons-react"
+import { IconChevronDown, IconCoin, IconCup, IconHeartSpark, IconLayoutDashboard, IconLemon, IconPhoneRinging, IconShirt, IconUsers } from "@tabler/icons-react"
 import { useState } from "react"
 
 const SIDEBAR_LIST = {
@@ -25,7 +25,7 @@ export default function Sidebar() {
           setClickedState(clickedState == SIDEBAR_LIST.PRODUK_FISIK ? null : SIDEBAR_LIST.PRODUK_FISIK)
         }}>
           <IconShirt />
-          <div className="mr-auto">
+          <div className="mr-auto text-gray-500">
             Produk Fisik
           </div>
           <div>
@@ -37,9 +37,9 @@ export default function Sidebar() {
           >
             Katalog
           </NavLink>
-          <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+          <NavLink to={'/purchase-physical-product'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
             Pembelian
-          </div>
+          </NavLink>
         </div>
       </div>
       {/* produk olahan */}
@@ -48,7 +48,7 @@ export default function Sidebar() {
           setClickedState(clickedState == SIDEBAR_LIST.PRODUK_OLAHAN ? null : SIDEBAR_LIST.PRODUK_OLAHAN)
         }}>
           <IconCup />
-          <div className="mr-auto">
+          <div className="mr-auto text-gray-500">
             Produk Olahan
           </div>
           <div>
@@ -83,7 +83,7 @@ export default function Sidebar() {
           setClickedState(clickedState == SIDEBAR_LIST.PRODUK_LAYANAN ? null : SIDEBAR_LIST.PRODUK_LAYANAN)
         }}>
           <IconHeartSpark />
-          <div className="mr-auto">
+          <div className="mr-auto text-gray-500">
             Produk Layanan
           </div>
           <div>
@@ -96,6 +96,11 @@ export default function Sidebar() {
           Katalog
         </NavLink>
       </div>
+      {/* supplier */}
+      <NavLink to={'/supplier'} className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
+        <IconPhoneRinging />
+        Supplier
+      </NavLink>
       {/* Penjualan */}
       <Link className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
         <IconCoin />

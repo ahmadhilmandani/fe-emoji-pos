@@ -86,8 +86,9 @@
     line-height: 160%;
     font-family: "Inter", sans-serif;
 
-    /* @apply text-dark dark:text-light; */
+    @apply text-neutral-800;
   }
+
 
   h1,
   h2,

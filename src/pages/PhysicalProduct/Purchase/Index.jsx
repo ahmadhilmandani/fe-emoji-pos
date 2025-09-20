@@ -3,58 +3,34 @@ import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
-import { getProduct } from "../../../api/getProduct";
-import { toast } from "react-toastify";
-import PhysicalProductIndexLoading from "../Component/IndexLoading";
 
-export default function PhysicalProductIndex() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [dataProducts, setDataProducts] = useState()
+export default function PurchasePhysicalProductIndex() {
   const navigate = useNavigate()
 
-  const getProducts = async () => {
-    try {
-      const res = await getProduct(`?type=produk_fisik`)
-      setDataProducts(res.data.products)
-    } catch (error) {
-      toast.error(error.response.data.msg)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getProducts()
-  }, [])
-
-  if (isLoading) {
-    return <PhysicalProductIndexLoading />
-  } else {
-    return (
+  return (
+    <div>
+      <header className="flex justify-between items-center gap-5">
+        <h1>Pembelian Produk Fisik</h1>
+        <Button buttonType={'primary'} onClickProp={() => {
+          navigate('/purchase-physical-product/add')
+        }}>
+          Tambah
+          <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
+        </Button>
+      </header>
       <div>
-        <header className="flex justify-between items-center gap-5">
-          <h1>Produk Fisik</h1>
-          <Button buttonType={'primary'} onClickProp={() => {
-            navigate('/physical-product/add')
-          }}>
-            Tambah
-            <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
-          </Button>
-        </header>
-        <div>
-          <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
-            <div className="flex gap-1 items-stretch">
-              <Input
-                valueProp={''} placeholderProp={'cari berdasarkan nama'} typeProp={'text'} inputId={'cari'} onChangeProp={() => {
-                }} isRequired={false}
-              />
-              <div className="p-2.5 flex justify-center items-center aspect-square rounded-lg bg-yellow-300">
-                <IconSearch size={16} />
-              </div>
+        <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
+          <div className="flex gap-1 items-stretch">
+            <Input
+              valueProp={''} placeholderProp={'cari berdasarkan nama'} typeProp={'text'} inputId={'cari'} onChangeProp={() => {
+              }} isRequired={false}
+            />
+            <div className="p-2.5 flex justify-center items-center aspect-square rounded-lg bg-yellow-300">
+              <IconSearch size={16} />
             </div>
           </div>
-          <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
+        </div>
+        {/* <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
             <table className="min-w-[320px] w-full text-left rtl:text-right">
               <thead className="uppercase border-b border-gray-200">
                 <tr>
@@ -82,9 +58,9 @@ export default function PhysicalProductIndex() {
                 {dataProducts?.map((val) => {
                   return (
                     <tr className="bg-white border-b border-gray-200 hover:bg-gray-50/50">
-                      <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {val.name}
-                      </td>
+                      </th>
                       <td className="px-6 py-4">
                         Rp. {val.price}
                       </td>
@@ -116,9 +92,9 @@ export default function PhysicalProductIndex() {
                 })}
               </tbody>
             </table>
-          </div>
-        </div>
+          </div> */}
       </div>
-    )
-  }
+    </div>
+  )
+
 }
