@@ -3,9 +3,31 @@ import Badge from "../../../components/Badge";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { getPurchase } from "../../../api/getPurchase";
 
 export default function PurchasePhysicalProductIndex() {
   const navigate = useNavigate()
+  const [purchaseData, setPurchaseData] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
+  const handleGetPurchase = async () => {
+    setIsLoading(true)
+    
+    try {
+      const res = await getPurchase()
+      setPurchaseData(res.data.purchases)
+      return res
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    handleGetPurchase()
+  }, [])
 
   return (
     <div>
@@ -30,48 +52,42 @@ export default function PurchasePhysicalProductIndex() {
             </div>
           </div>
         </div>
-        {/* <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
+        <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
             <table className="min-w-[320px] w-full text-left rtl:text-right">
               <thead className="uppercase border-b border-gray-200">
                 <tr>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Nama
+                    No. Invoice
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Harga
+                    Nama Supplier
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Stock
+                    No. Hp Supplier
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Min. Stock
+                    Total
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold">
-                    Satuan
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    <span className="sr-only">Edit</span>
+                    {/* <span className="sr-only">Edit</span> */}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {dataProducts?.map((val) => {
+                {purchaseData?.map((val) => {
                   return (
                     <tr className="bg-white border-b border-gray-200 hover:bg-gray-50/50">
                       <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {val.name}
+                        {val.purchase_code}
                       </th>
                       <td className="px-6 py-4">
-                        Rp. {val.price}
+                        {val.supplier_name}
                       </td>
                       <td className="px-6 py-4">
-                        {val.stock ? val.stock : 0}
+                        {val.supplier_phone}
                       </td>
                       <td className="px-6 py-4">
-                        {val.phys_prod_min_stock}
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.unit}
+                        Rp. {val.total_amount}
                       </td>
                       <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
                         <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
@@ -92,7 +108,7 @@ export default function PurchasePhysicalProductIndex() {
                 })}
               </tbody>
             </table>
-          </div> */}
+          </div>
       </div>
     </div>
   )
