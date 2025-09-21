@@ -62,12 +62,12 @@ export default function Sidebar() {
           <div>
             <div className="flex gap-3 items-center pl-8 pr-3 py-3 text-gray-500">
               <IconLemon />
-              <div className="mr-auto">
+              <div className="mr-auto text-gray-500">
                 Bahan Baku
               </div>
             </div>
             <div className="ml-12 border-l-4 border-gray-300">
-              <NavLink to={'/'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
+              <NavLink to={'/ingredient'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
                 Katalog
               </NavLink>
               <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">

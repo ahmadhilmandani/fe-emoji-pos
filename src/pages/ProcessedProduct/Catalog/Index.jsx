@@ -1,5 +1,4 @@
-import { IconDots, IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react";
-import Badge from "../../../components/Badge";
+import { IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { useNavigate } from "react-router";

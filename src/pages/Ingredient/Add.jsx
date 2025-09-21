@@ -12,7 +12,6 @@ import { getSupplier } from "../../api/getSupplier"
 
 export default function IngredientAdd() {
   const [name, setName] = useState()
-  const [stock, setStock] = useState()
   const [minStock, setMinStock] = useState()
   const [unit, setUnit] = useState()
   const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +31,7 @@ export default function IngredientAdd() {
   }
 
   const handleSubmitIngredient = async () => {
-    if (!name || !stock || !minStock || !unit) {
+    if (!name || !minStock || !unit) {
       return toast.error(<ErrorToastMsg />)
     }
 
@@ -41,7 +40,7 @@ export default function IngredientAdd() {
       await postIngredients({
         store_id: userInfo.storeId,
         name,
-        stock,
+        stock: 0,
         min_stock: minStock,
         unit
       })
@@ -79,9 +78,6 @@ export default function IngredientAdd() {
             </div>
           </div>
           <div className="flex gap-8 items-center flex-wrap mb-8">
-            <div className="min-w-[100px] flex-1">
-              <Input onChangeProp={setStock} valueProp={stock} labelProp={"Stock"} placeholderProp={'cth: 20'} typeProp={'number'} inputId={'stock'} />
-            </div>
             <div className="min-w-[100px] flex-1">
               <Input onChangeProp={setMinStock} valueProp={minStock} labelProp={"Min. Stock"} placeholderProp={'cth: 5'} typeProp={'number'} inputId={'min-stock'} />
             </div>

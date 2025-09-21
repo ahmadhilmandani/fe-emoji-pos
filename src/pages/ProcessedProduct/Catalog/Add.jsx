@@ -47,7 +47,7 @@ export default function ProcessedProductAdd() {
     if (qty >= 0) {
       const temptArr = selectedIngredients.map((val) => {
         if (val.id === id) {
-          return { id: id, name: val.name, qty: qty, unit: val.unit }
+          return { ...val, qty: qty }
         }
         return val
       })
