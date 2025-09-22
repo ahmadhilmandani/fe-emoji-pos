@@ -70,9 +70,9 @@ export default function Sidebar() {
               <NavLink to={'/ingredient'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
                 Katalog
               </NavLink>
-              <div className="flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500">
+              <NavLink to={'/purchase-ingredient'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center px-8 py-3" : "flex gap-3 items-center px-8 py-3 hover:bg-gray-100 hover:cursor-pointer transition-all text-gray-500")}>
                 Pembelian
-              </div>
+              </NavLink>
             </div>
           </div>
         </div>

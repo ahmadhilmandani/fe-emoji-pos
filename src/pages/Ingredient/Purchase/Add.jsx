@@ -3,15 +3,15 @@ import Button from "../../../components/Button";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import ErrorToastMsg from "../../../components/ErrorToastMsg";
-import { getProduct } from "../../../api/getProduct";
+import ErrorToastMsg from "../../../components/ErrorToastMsg"
 import { getSupplier } from "../../../api/getSupplier";
 import { postPurchase } from "../../../api/postPurchae";
+import { getAllIngredients } from "../../../api/getAllIngredients";
 
-export default function PurchasePhysicalProductAdd() {
+export default function PurchaseIngredientAdd() {
   const [isLoading, setIsLoading] = useState(false)
-  const [dataProducts, setDataProducts] = useState()
-  const [listPurchaseProd, setListPurchaseProd] = useState([])
+  const [ingredients, setIngreingredients] = useState()
+  const [listPurchaseIngredient, setListPurchaseIngredient] = useState([])
   const [supplierData, setSupplierData] = useState()
   const [selectedSupplier, setSelectedSupplier] = useState()
   const [totalAmount, setTotalAmmount] = useState(0)
@@ -29,10 +29,10 @@ export default function PurchasePhysicalProductAdd() {
     }
   }
 
-  const getProducts = async () => {
+  const getIngredeitns = async () => {
     try {
-      const res = await getProduct(`?type=produk_fisik`)
-      setDataProducts(res.data.products)
+      const res = await getAllIngredients()
+      setIngreingredients(res.data.ingredients)
     } catch (error) {
       toast.error(error.response.data.msg)
     } finally {
@@ -42,7 +42,7 @@ export default function PurchasePhysicalProductAdd() {
 
   const handleQtyList = (id, quantity) => {
     if (quantity >= 1) {
-      setListPurchaseProd(prevVal =>
+      setListPurchaseIngredient(prevVal =>
         prevVal.map(val =>
           val.id === id ? { ...val, quantity: quantity, subtotal: (quantity * val.price) - val.discount } : val
         )
@@ -51,15 +51,15 @@ export default function PurchasePhysicalProductAdd() {
   }
 
   const handleDiscount = (id, discount) => {
-    setListPurchaseProd(prevVal =>
+    setListPurchaseIngredient(prevVal =>
       prevVal.map(val =>
         val.id === id ? { ...val, discount: discount, subtotal: (val.quantity * val.price) - discount } : val
       )
     )
   }
 
-  const addListPurchaseProd = (id, price, current_qty, name) => {
-    setListPurchaseProd((prev) => {
+  const addlistPurchaseIngredient = (id, price, current_qty, name) => {
+    setListPurchaseIngredient((prev) => {
       const alreadyAdded = prev.some((prod) => prod.id === id)
 
       if (alreadyAdded) return prev.map(val =>
@@ -82,7 +82,7 @@ export default function PurchasePhysicalProductAdd() {
   }
 
 
-  const submitProduct = async () => {
+  const submitIngredient = async () => {
     if (!selectedSupplier) {
       return toast.error(<ErrorToastMsg />)
     }
@@ -92,13 +92,13 @@ export default function PurchasePhysicalProductAdd() {
       const payload = {
         supplier_id: selectedSupplier,
         total_amount: totalAmount,
-        type: 'phys_prod',
+        type: "ingredient",
         purchase_detail: []
       }
 
-      listPurchaseProd.forEach(val => {
+      listPurchaseIngredient.forEach(val => {
         payload.purchase_detail.push({
-          phys_product_id: val.id,
+          ingredient_id: val.id,
           price: val.price,
           current_qty: val.current_qty,
           quantity: val.quantity,
@@ -108,7 +108,7 @@ export default function PurchasePhysicalProductAdd() {
       })
       await postPurchase(payload)
       toast.success('Berhasil Membeli Produk')
-      navigate('/purchase-physical-product')
+      navigate('/purchase-ingredient')
     } catch (error) {
       toast.error(error.response.data.msg)
     } finally {
@@ -118,15 +118,15 @@ export default function PurchasePhysicalProductAdd() {
 
   useEffect(() => {
     let temptSubTotal = 0
-    listPurchaseProd.forEach(val => {
+    listPurchaseIngredient.forEach(val => {
       temptSubTotal = temptSubTotal + val.subtotal
     })
     setTotalAmmount(temptSubTotal)
-  }, [listPurchaseProd])
+  }, [listPurchaseIngredient])
 
   useEffect(() => {
     getAllSupplier()
-    getProducts()
+    getIngredeitns()
   }, [])
 
 
@@ -136,11 +136,11 @@ export default function PurchasePhysicalProductAdd() {
       <header className="mb-8">
         <div className="flex items-center gap-5">
           <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {
-            navigate('/purchase-physical-product')
+            navigate('/ingredients')
           }}>
             <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
           </div>
-          <h1 className="mb-3">Beli Produk Fisik</h1>
+          <h1 className="mb-3">Beli Bahan Baku</h1>
         </div>
         <div className="flex gap-5 max-w-[800px]">
           <div className="size-10"></div>
@@ -156,7 +156,7 @@ export default function PurchasePhysicalProductAdd() {
         <div className="min-w-[75%] flex-1">
           <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
             <div className="flex gap-1 items-stretch font-bold text-xl text-yellow-500">
-              Daftar Produk
+              Daftar Bahan Baku
             </div>
           </div>
           <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
@@ -165,9 +165,6 @@ export default function PurchasePhysicalProductAdd() {
                 <tr>
                   <th scope="col" className="px-6 py-4 font-bold text-gray-400">
                     Nama
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold text-gray-400">
-                    Supplier
                   </th>
                   <th scope="col" className="px-6 py-4 font-bold text-gray-400">
                     Harga
@@ -187,7 +184,7 @@ export default function PurchasePhysicalProductAdd() {
                 </tr>
               </thead>
               <tbody>
-                {dataProducts?.map((val) => {
+                {ingredients?.map((val) => {
                   return (
                     <tr className="bg-white border-b border-gray-200 hover:bg-gray-50/50">
                       <td className="px-6 py-4">
@@ -209,7 +206,7 @@ export default function PurchasePhysicalProductAdd() {
                         {val.unit}
                       </td>
                       <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
-                        <button onClick={() => { addListPurchaseProd(val.id, val.price, val.stock, val.name) }} className="p-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
+                        <button onClick={() => { addlistPurchaseIngredient(val.id, val.price, val.stock, val.name) }} className="p-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
                           <IconPlus className="group-hover:-translate-y-0.5 transition-all stroke-amber-500" stroke={1.2} size={22} />
                         </button>
                       </td>
@@ -223,7 +220,7 @@ export default function PurchasePhysicalProductAdd() {
         <div className="flex-1 relative">
           <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
             <div className="flex gap-1 items-stretch font-bold text-xl text-yellow-500">
-              Daftar Pembelian Produk
+              Daftar Pembelian Bahan Baku
             </div>
           </div>
           <div className="w-full overflow-x-auto relative border border-b-0 border-gray-200 bg-white p-5">
@@ -247,7 +244,7 @@ export default function PurchasePhysicalProductAdd() {
               </select>
             </div>
 
-            {listPurchaseProd?.map((val, index) => {
+            {listPurchaseIngredient?.map((val, index) => {
               return (
                 <>
                   <div key={val.id} className="flex gap-1 pt-6 pb-8 mb-5 border-b border-gray-300">
@@ -304,7 +301,7 @@ export default function PurchasePhysicalProductAdd() {
             </div>
           </div>
           <div className="bg-white p-5 border border-gray-200 rounded-b-lg sticky bottom-0 left-0 right-0">
-            <Button buttonType={'primary'} isExtend={true} onClickProp={submitProduct} isLoading={isLoading}>
+            <Button buttonType={'primary'} isExtend={true} onClickProp={submitIngredient} isLoading={isLoading}>
               Beli
             </Button>
           </div>

@@ -6,18 +6,17 @@ import Badge from "../../components/Badge"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { getAllIngredients } from "../../api/getAllIngredients"
-import { useSelector } from "react-redux"
 
 export default function IndgredientIndex() {
   const [ingredients, setIngredients] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
   const navigate = useNavigate()
-  const userInfo = useSelector((state)=>{return state.userInfoSlie})
+  
   const getIngredients = async () => {
     setIsLoading(true)
     try {
-      const res = await getAllIngredients(userInfo.storeId)
+      const res = await getAllIngredients()
       setIngredients(res.data.ingredients)
     } catch (error) {
       toast.error((error.response.data.msg))
@@ -60,6 +59,9 @@ export default function IndgredientIndex() {
                   Nama
                 </th>
                 <th scope="col" className="px-6 py-4 font-bold">
+                  Harga
+                </th>
+                <th scope="col" className="px-6 py-4 font-bold">
                   Stock
                 </th>
                 <th scope="col" className="px-6 py-4 font-bold">
@@ -81,6 +83,9 @@ export default function IndgredientIndex() {
                       <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {val.name}
                       </th>
+                      <td className="px-6 py-4">
+                        {val.price}
+                      </td>
                       <td className="px-6 py-4">
                         {val.stock}
                       </td>

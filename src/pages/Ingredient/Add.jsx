@@ -1,34 +1,19 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import { postIngredients } from "../../api/postIngredients"
-import { useSelector } from "react-redux"
 import { IconChevronLeft } from "@tabler/icons-react"
 import Card from "../../components/Card"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import ErrorToastMsg from "../../components/ErrorToastMsg"
-import { getSupplier } from "../../api/getSupplier"
 
 export default function IngredientAdd() {
   const [name, setName] = useState()
   const [minStock, setMinStock] = useState()
   const [unit, setUnit] = useState()
   const [isLoading, setIsLoading] = useState(false)
-
-  const userInfo = useSelector((state) => { return state.userInfoSlie })
-
-  const getAllSupplier = async () => {
-    try {
-      const res = await getSupplier()
-      console.log(res.data.supplier)
-      // setSupplierData(res.data.supplier)
-    } catch (error) {
-      toast.error(error.response.data.msg)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const [price, setPrice] = useState(false)
 
   const handleSubmitIngredient = async () => {
     if (!name || !minStock || !unit) {
@@ -38,11 +23,11 @@ export default function IngredientAdd() {
     setIsLoading(true)
     try {
       await postIngredients({
-        store_id: userInfo.storeId,
         name,
         stock: 0,
         min_stock: minStock,
-        unit
+        unit,
+        price
       })
       navigate('/ingredient')
       toast.success("Berhasil Menambah Bahan Baku")
@@ -53,10 +38,6 @@ export default function IngredientAdd() {
       setIsLoading(false)
     }
   }
-
-  useEffect(() => {
-    getAllSupplier()
-  }, [])
 
   const navigate = useNavigate()
 
@@ -78,6 +59,9 @@ export default function IngredientAdd() {
             </div>
           </div>
           <div className="flex gap-8 items-center flex-wrap mb-8">
+            <div className="min-w-[100px] flex-1">
+              <Input onChangeProp={setPrice} valueProp={price} labelProp={"Harga"} placeholderProp={'cth: 25000'} typeProp={'number'} inputId={'price'} />
+            </div>
             <div className="min-w-[100px] flex-1">
               <Input onChangeProp={setMinStock} valueProp={minStock} labelProp={"Min. Stock"} placeholderProp={'cth: 5'} typeProp={'number'} inputId={'min-stock'} />
             </div>

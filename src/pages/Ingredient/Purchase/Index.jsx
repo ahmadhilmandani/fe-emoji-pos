@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getPurchase } from "../../../api/getPurchase";
 
-export default function PurchasePhysicalProductIndex() {
+export default function PurchaseIngredientIndex() {
   const navigate = useNavigate()
   const [purchaseData, setPurchaseData] = useState()
   const [isLoading, setIsLoading] = useState(true)
@@ -15,7 +15,7 @@ export default function PurchasePhysicalProductIndex() {
     setIsLoading(true)
     
     try {
-      const res = await getPurchase(`type=phys_prod`)
+      const res = await getPurchase('type=ingredient')
       setPurchaseData(res.data.purchases)
       return res
     } catch (error) {
@@ -32,9 +32,9 @@ export default function PurchasePhysicalProductIndex() {
   return (
     <div>
       <header className="flex justify-between items-center gap-5">
-        <h1>Pembelian Produk Fisik</h1>
+        <h1>Pembelian Bahan Baku</h1>
         <Button buttonType={'primary'} onClickProp={() => {
-          navigate('/purchase-physical-product/add')
+          navigate('/purchase-ingredient/add')
         }}>
           Tambah
           <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
@@ -84,7 +84,7 @@ export default function PurchasePhysicalProductIndex() {
                         {val.purchase_code}
                       </th>
                       <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Produk Fisik
+                        Bahan Baku
                       </th>
                       <td className="px-6 py-4">
                         {val.supplier_name}
