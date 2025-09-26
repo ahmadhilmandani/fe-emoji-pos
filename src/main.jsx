@@ -22,6 +22,7 @@ createRoot(document.getElementById('root')).render(
         pauseOnHover
         theme="light"
         transition={Bounce}
+        stacked
       />
       <RouterProvider router={router} />
     </Provider>
