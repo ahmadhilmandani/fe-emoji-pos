@@ -136,9 +136,8 @@ export default function ProcessedProductAdd() {
                   ingredients?.map((val) => {
                     return (
                       <>
-                        <option value={`${val.id}@${val.name}@${val.unit}@${val.stock}`} className="" disabled={val.stock <= val.min_stock}>
+                        <option value={`${val.id}@${val.name}@${val.unit}@${val.stock}`} className="">
                           {val.name}
-                          {val.stock <= val.min_stock ? <small className="text-[13px]"> (<span className="text-[13px] font-black">Stock</span> Kurang Dari <span className="text-[13px] font-black">Min. Stock</span>)</small> : ''}
                         </option>
                       </>
                     )
