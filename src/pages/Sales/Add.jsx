@@ -11,15 +11,25 @@ import { postSale } from "../../api/postSale";
 export default function SaleAdd() {
   const [isLoading, setIsLoading] = useState(false)
   const [dataProducts, setDataProducts] = useState()
-  const [listPurchaseProd, setListPurchaseProd] = useState([])
+  const [listSaleProd, setListSaleProd] = useState([])
   const [undiscountTotal, setUndiscountTotal] = useState(0)
   const [totalAmount, setTotalAmmount] = useState(0)
   const [regulerDiscount, setRegulerDiscount] = useState(0)
   const [paidAmount, setPaidAmount] = useState(0)
   const [changeAmount, setChangeAmount] = useState(0)
+  const [isBtnSaleShow, setIsBtnSaleShow] = useState(false)
+  const [msgBtnHide, setMsgBtnHide] = useState('')
 
   const navigate = useNavigate()
 
+  function togleSaleBtn(isShow, msg = '') {
+    setIsBtnSaleShow(isShow)
+    setMsgBtnHide(msg)
+
+  }
+  function formatRupiah(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
 
   const getProducts = async () => {
     try {
@@ -55,7 +65,7 @@ export default function SaleAdd() {
 
   const handleQtyList = (id, type, used_product_qty) => {
     if (used_product_qty >= 1) {
-      setListPurchaseProd((prevState) => {
+      setListSaleProd((prevState) => {
 
         if (type === "produk_fisik") {
           return prevState.map((val) => {
@@ -101,68 +111,69 @@ export default function SaleAdd() {
   }
 
 
-  const addListSalesProd = (id, type, price, current_stock, min_stock, ingredient, name) => {
-    console.log(ingredient)
-    setListPurchaseProd((prevState) => {
-      const alreadyAdded = prevState.some((val) => val.id === id);
+  const addListSalesProd = (id, type, price, current_stock, min_stock, ingredient, name, is_can_sale) => {
+    if (is_can_sale) {
+      setListSaleProd((prevState) => {
+        const alreadyAdded = prevState.some((val) => val.id === id);
 
-      if (!alreadyAdded) {
-        return [
-          ...prevState,
-          {
-            id: id,
-            type: type,
-            price: price,
-            current_stock: current_stock,
-            min_stock: min_stock,
-            used_product_qty: 1,
-            name: name,
-            ingredients: ingredient || null
-          }
-        ]
-      }
+        if (!alreadyAdded) {
+          return [
+            ...prevState,
+            {
+              id: id,
+              type: type,
+              price: price,
+              current_stock: current_stock,
+              min_stock: min_stock,
+              used_product_qty: 1,
+              name: name,
+              ingredients: ingredient || null
+            }
+          ]
+        }
 
 
-      if (type === "produk_fisik") {
-        return prevState.map((val) => {
-          if (val.id == id && (val.current_stock - (val.used_product_qty + 1)) > val.min_stock) {
-            return { ...val, used_product_qty: val.used_product_qty + 1 }
-          } else if (val.id == id && (val.current_stock - (val.used_product_qty + 1)) < val.min_stock) {
-            toast.error(`Gagal, Menjual ${val.used_product_qty + 1} ${val.name} Membuat Stock Kurang Dari Batas Minimal`)
-          }
-          return val
-        })
-      } else if (type === "produk_olahan") {
-        return prevState.map((val) => {
-          if (val.id == id) {
-            let isStockEnough = true
-
-            val.ingredients.forEach(rowIngredient => {
-              if ((rowIngredient.stock - (rowIngredient.quantity * (val.used_product_qty + 1))) < rowIngredient.min_stock) {
-                toast.error(`Bahan Baku ${rowIngredient.ingredient_name} kurang untuk membuat ${val.used_product_qty + 1} ${name}`)
-                isStockEnough = false
-              }
-            })
-
-            if (isStockEnough) {
-              return {
-                ...val,
-                used_product_qty: val.used_product_qty + 1,
-              }
+        if (type === "produk_fisik") {
+          return prevState.map((val) => {
+            if (val.id == id && (val.current_stock - (val.used_product_qty + 1)) > val.min_stock) {
+              return { ...val, used_product_qty: val.used_product_qty + 1 }
+            } else if (val.id == id && (val.current_stock - (val.used_product_qty + 1)) < val.min_stock) {
+              toast.error(`Gagal, Menjual ${val.used_product_qty + 1} ${val.name} Membuat Stock Kurang Dari Batas Minimal`)
             }
             return val
+          })
+        } else if (type === "produk_olahan") {
+          return prevState.map((val) => {
+            if (val.id == id) {
+              let isStockEnough = true
+
+              val.ingredients.forEach(rowIngredient => {
+                if ((rowIngredient.stock - (rowIngredient.quantity * (val.used_product_qty + 1))) < rowIngredient.min_stock) {
+                  toast.error(`Bahan Baku ${rowIngredient.ingredient_name} kurang untuk membuat ${val.used_product_qty + 1} ${name}`)
+                  isStockEnough = false
+                }
+              })
+
+              if (isStockEnough) {
+                return {
+                  ...val,
+                  used_product_qty: val.used_product_qty + 1,
+                }
+              }
+              return val
+            }
+            return val
+          })
+        }
+        return prevState.map((val) => {
+          if (val.id == id) {
+            return { ...val, used_product_qty: val.used_product_qty + 1 }
           }
           return val
         })
       }
-      return prevState.map((val) => {
-        if (val.id == id) {
-          return { ...val, used_product_qty: val.used_product_qty + 1 }
-        }
-        return val
-      })
+      )
     }
-    )
   }
 
 
@@ -178,12 +189,12 @@ export default function SaleAdd() {
 
     try {
       const payload = {
-        total_amount: totalAmount,
+        final_total_amount: totalAmount,
         reguler_discount: regulerDiscount,
-        undiscount_total: undiscountTotal,
-        sales: listPurchaseProd,
+        undiscount_total_amount: undiscountTotal,
+        sales: listSaleProd,
         paid_amount: paidAmount,
-        change_amount: changeAmount
+        change_amount: changeAmount,
       }
 
       await postSale(payload)
@@ -199,21 +210,31 @@ export default function SaleAdd() {
 
   useEffect(() => {
     let temptUndiscountTotal = 0
-    listPurchaseProd.forEach(val => {
+    listSaleProd.forEach(val => {
       temptUndiscountTotal = temptUndiscountTotal + (val.price * val.used_product_qty)
     })
     setUndiscountTotal(temptUndiscountTotal)
-  }, [listPurchaseProd])
+  }, [listSaleProd])
 
   useEffect(() => {
-    setTotalAmmount(undiscountTotal - regulerDiscount)
+    const totalAmountTemp = undiscountTotal - regulerDiscount
+    if (totalAmountTemp < 0) {
+      togleSaleBtn(false, 'Diskon Melebihi Total')
+      setTotalAmmount(0)
+    } else {
+      setTotalAmmount(totalAmountTemp)
+      togleSaleBtn(true)
+    }
+
   }, [undiscountTotal, regulerDiscount])
 
   useEffect(() => {
-    if (totalAmount - paidAmount < 0) {
+    if (totalAmount - paidAmount <= 0 && (totalAmount != 0)) {
       setChangeAmount(Math.abs(totalAmount - paidAmount))
-    } else { 
+      togleSaleBtn(true)
+    } else {
       setChangeAmount(0)
+      togleSaleBtn(false, 'Pilih 1 produk dan pembayaran harus Sama atau lebih dari total')
     }
   }, [totalAmount, paidAmount])
 
@@ -230,7 +251,7 @@ export default function SaleAdd() {
           <header className="mb-8">
             <div className="flex items-center gap-5">
               <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {
-                navigate('/purchase-physical-product')
+                navigate('/Sale-physical-product')
               }}>
                 <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
               </div>
@@ -308,12 +329,9 @@ export default function SaleAdd() {
 
                         <div className="relative flex flex-col gap-5 items-center">
                           <button onClick={() => {
-                            addListSalesProd(val.id, val.type, val.price, val.stock, val.phys_prod_min_stock, val.ingredients, val.name)
+                            addListSalesProd(val.id, val.type, val.price, val.stock, val.phys_prod_min_stock, val.ingredients, val.name, val.is_can_sale)
                           }} className={`${val.is_can_sale ? 'hover:bg-gray-50 hover:cursor-pointer hover:border-gray-400 opacity-100' : 'opacity-50 hover:cursor-not-allowed'} p-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group transition-all`}>
                             <IconPlus className={`${val.is_can_sale ? 'text-gray-500/70' : 'text-rose-300'} group-hover:-translate-y-0.5 transition-all stroke-gray-500`} stroke={1.2} size={22} />
-                          </button>
-                          <button className={`${val.is_can_sale ? 'text-gray-500/70' : 'text-rose-300'} p-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-gray-50 hover:cursor-pointer transition-all hover:border-gray-400`}>
-                            <IconMinus className={`group-hover:-translate-y-0.5 transition-all stroke-gray-500`} stroke={1.2} size={22} />
                           </button>
                         </div>
                       </div>
@@ -369,7 +387,7 @@ export default function SaleAdd() {
             </div>
           </div>
           <div className="w-full border border-gray-200 bg-white p-5">
-            {listPurchaseProd?.map((val, index) => {
+            {listSaleProd?.map((val, index) => {
               return (
                 <>
                   <div key={val.id} className="flex gap-1 py-3">
@@ -452,14 +470,14 @@ export default function SaleAdd() {
                 <div className="border-b border-dashed border-gray-400 pb-4">
                   <div className="flex justify-between gap-3 mb-3">
                     <div className="text-gray-500/70">Total Sblm. Diskon</div>
-                    <div className="font-bold text-gray-500/70">Rp. {undiscountTotal}</div>
+                    <div className="font-bold text-gray-500/70">Rp.  {formatRupiah(undiscountTotal)}</div>
                   </div>
                   <div className="flex justify-between gap-3 mb-3">
                     <div className="text-gray-500/70">
                       Diskon
                       <IconInfoCircle className="inline-block ml-1.5" size={16} />
                     </div>
-                    <div className="font-bold text-gray-500/70">Rp. {regulerDiscount}</div>
+                    <div className="font-bold text-gray-500/70">Rp. {formatRupiah(regulerDiscount)}</div>
                   </div>
                   <div className="flex justify-between gap-3 mb-3">
                     <div className=" gap-2 items-center">
@@ -475,15 +493,15 @@ export default function SaleAdd() {
                 </div>
                 <div className="flex justify-between gap-3 pt-4">
                   <div className="text-lg">Total</div>
-                  <div className="font-bold text-lg">Rp. {totalAmount}</div>
+                  <div className="font-bold text-lg">Rp. {formatRupiah(totalAmount)}</div>
                 </div>
                 <div className="flex justify-between gap-3 pt-4">
                   <div className="text-lg">Pembayaran</div>
-                  <div className="font-bold text-lg">Rp. {paidAmount}</div>
+                  <div className="font-bold text-lg">Rp. {formatRupiah(paidAmount)}</div>
                 </div>
                 <div className="flex justify-between gap-3 pt-4">
                   <div className="text-lg">Kembalian</div>
-                  <div className="font-bold text-lg">Rp. {changeAmount}</div>
+                  <div className="font-bold text-lg">Rp. {formatRupiah(changeAmount)}</div>
                 </div>
               </div>
               <div>
@@ -499,9 +517,16 @@ export default function SaleAdd() {
                     </button>
                   </div>
                 </div>
-                <Button buttonType={'primary'} isExtend={true} onClickProp={submitProduct} isLoading={isLoading}>
-                  Jual
-                </Button>
+                {isBtnSaleShow ? <>
+                  <Button buttonType={'primary'} isExtend={true} onClickProp={submitProduct} isLoading={isLoading}>
+                    Jual
+                  </Button>
+                </> : <>
+                  <div className="text-rose-500 text-center">
+                    {msgBtnHide}
+                  </div>
+                </>
+                }
               </div>
             </div>
           </div>
