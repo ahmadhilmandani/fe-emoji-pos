@@ -191,9 +191,6 @@ export default function PurchaseIngredientAdd() {
                         {val.name}
                       </td>
                       <td className="px-6 py-4">
-                        {val.name}
-                      </td>
-                      <td className="px-6 py-4">
                         Rp. {val.price}
                       </td>
                       <td className="px-6 py-4">

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router"
 import LogoPos from "../assets/logo.png"
-import { IconChevronDown, IconCoin, IconCup, IconHeartSpark, IconLayoutDashboard, IconLemon, IconPhoneRinging, IconShirt, IconUsers } from "@tabler/icons-react"
+import { IconBuildingStore, IconChevronDown, IconCoin, IconCup, IconHeartSpark, IconLayoutDashboard, IconLemon, IconPhoneRinging, IconShirt, IconUsers } from "@tabler/icons-react"
 import { useState } from "react"
 
 const SIDEBAR_LIST = {
@@ -97,19 +97,23 @@ export default function Sidebar() {
         </NavLink>
       </div>
       {/* supplier */}
-      <NavLink to={'/supplier'} className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
+      <NavLink to={'/supplier'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconPhoneRinging />
         Supplier
       </NavLink>
       {/* Penjualan */}
-      <Link className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
+      <NavLink to={'/sales'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconCoin />
         Penjualan
-      </Link>
+      </NavLink>
       {/* pengguna */}
       <Link to={'/employee'} className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
         <IconUsers />
         Pengguna
+      </Link>
+      <Link to={'/employee'} className="hover:bg-gray-100 transition-all flex gap-3 items-center mt-3 p-3 text-gray-500">
+        <IconBuildingStore />
+        Toko
       </Link>
     </aside>
   )
