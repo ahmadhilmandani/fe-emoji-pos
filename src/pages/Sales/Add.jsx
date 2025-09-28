@@ -107,6 +107,9 @@ export default function SaleAdd() {
         })
       }
       )
+    } else if (used_product_qty == 0) {
+      const filteredList = listSaleProd.filter(item => item.id !== id);
+      setListSaleProd(filteredList)
     }
   }
 
@@ -397,7 +400,6 @@ export default function SaleAdd() {
                     <div className="w-full">
                       <div className="font-bold mb-1 text-lg">
                         {val.name}
-
                         {
                           val.type == "produk_fisik" ?
                             <>

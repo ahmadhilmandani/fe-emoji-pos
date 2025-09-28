@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { toast } from "react-toastify"
 import { getDetailSale } from "../../api/getDetailSale"
-import Button from "../../components/Button"
 import { IconChevronLeft, IconPlus } from "@tabler/icons-react"
 import formatRupiah from "../../utils/formatRupiah"
 
@@ -35,14 +35,14 @@ export default function SaleDetail() {
   return (
     <div>
       <header className="mb-5">
-                    <div className="flex items-center gap-5">
-                      <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {
-                        navigate('/history-sales')
-                      }}>
-                        <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
-                      </div>
-                      <h1 className="mb-3">Detail Penjualan</h1>
-                    </div>
+        <div className="flex items-center gap-5">
+          <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {
+            navigate('/history-sales')
+          }}>
+            <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
+          </div>
+          <h1 className="mb-3">Detail Penjualan</h1>
+        </div>
       </header>
       <div className="mb-5 bg-gray-100 border border-gray-200 p-5 rounded-lg flex justify-between gap-5 flex-wrap">
         <div>
