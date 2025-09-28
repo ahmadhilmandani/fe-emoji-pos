@@ -20,6 +20,7 @@ import PurchaseIngredientIndex from "../pages/Ingredient/Purchase/Index";
 import PurchaseIngredientAdd from "../pages/Ingredient/Purchase/Add";
 import SaleAdd from "../pages/Sales/Add";
 import HistorySaleIndex from "../pages/Sales/Index";
+import SaleDetail from "../pages/Sales/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path: 'history-sales',
         element: <HistorySaleIndex />
+      },
+      {
+        path: 'history-sales/:id',
+        element: <SaleDetail />
       },
     ]
   },
