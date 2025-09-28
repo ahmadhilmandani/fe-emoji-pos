@@ -21,6 +21,7 @@ import PurchaseIngredientAdd from "../pages/Ingredient/Purchase/Add";
 import SaleAdd from "../pages/Sales/Add";
 import HistorySaleIndex from "../pages/Sales/Index";
 import SaleDetail from "../pages/Sales/Detail";
+import PhysicalProductEdit from "../pages/PhysicalProduct/Catalog/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: 'physical-product/add',
         element: <PhysicalProductAdd />
+      },
+      {
+        path: 'physical-product/edit/:id',
+        element: <PhysicalProductEdit />
       },
       {
         path: 'purchase-physical-product',
