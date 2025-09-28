@@ -247,7 +247,7 @@ export default function SaleAdd() {
   return (
     <div>
       <div className="flex gap-4">
-        <div className="min-w-[70%] flex-1">
+        <div className="min-w-[70%] flex-1 ">
           <header className="mb-8">
             <div className="flex items-center gap-5">
               <div className="w-10 h-fit p-2.5 flex justify-center items-center aspect-square rounded-lg border border-gray-300 bg-white hover:cursor-pointer hover:bg-gray-50 transition-all group" onClick={() => {

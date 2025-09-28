@@ -19,6 +19,7 @@ import PurchasePhysicalProductAdd from "../pages/PhysicalProduct/Purchase/Add";
 import PurchaseIngredientIndex from "../pages/Ingredient/Purchase/Index";
 import PurchaseIngredientAdd from "../pages/Ingredient/Purchase/Add";
 import SaleAdd from "../pages/Sales/Add";
+import HistorySaleIndex from "../pages/Sales/Index";
 
 export const router = createBrowserRouter([
   {
@@ -94,8 +95,8 @@ export const router = createBrowserRouter([
         element: <SaleAdd />
       },
       {
-        path: 'sales/add',
-        element: <SaleAdd />
+        path: 'history-sales',
+        element: <HistorySaleIndex />
       },
     ]
   },
