@@ -5,6 +5,7 @@ import Input from "../../../components/Input";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getPurchase } from "../../../api/getPurchase";
+import { toast } from "react-toastify";
 
 export default function PurchasePhysicalProductIndex() {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export default function PurchasePhysicalProductIndex() {
       setPurchaseData(res.data.purchases)
       return res
     } catch (error) {
+      toast.error(error.response.data.msg)
       console.log(error)
     } finally {
       setIsLoading(false)
@@ -96,7 +98,7 @@ export default function PurchasePhysicalProductIndex() {
                         Rp. {val.total_amount}
                       </td>
                       <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
-                        <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
+                        <button onClick={()=>{navigate(`/purchase-physical-product/${val.id}`)}} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
                           <IconEye className="group-hover:-translate-y-0.5 transition-all stroke-amber-500" stroke={1.2} size={22} />
                           Detail
                         </button>
