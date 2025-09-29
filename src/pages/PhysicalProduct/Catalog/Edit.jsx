@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { toast } from "react-toastify"
 import { IconChevronLeft, IconPlus } from "@tabler/icons-react"
 import { getProductDetail } from "../../../api/getProductDetail"
-import formatRupiah from "../../../utils/formatRupiah"
+
 import { updateProduct } from "../../../api/updateProduct"
 import Card from "../../../components/Card"
 import Input from "../../../components/Input"
@@ -16,7 +15,6 @@ export default function PhysicalProductEdit() {
   const [minStock, setMinStock] = useState()
   const [unit, setUnit] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const [dataProduct, setDataProduct] = useState()
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -33,6 +31,9 @@ export default function PhysicalProductEdit() {
         unit: unit
       }
       await updateProduct(id, payload)
+      toast.success("Berhasil Update Produk")
+      navigate('/physical-product')
+
     } catch (error) {
       toast.error(error.msg)
     } finally {
@@ -44,7 +45,6 @@ export default function PhysicalProductEdit() {
     setIsLoading(true)
     try {
       const res = await getProductDetail(id)
-      console.log(res.data)
       setName(res.data.product.name)
       setPrice(res.data.product.price)
       setMinStock(res.data.product.phys_prod_min_stock)
@@ -81,12 +81,12 @@ export default function PhysicalProductEdit() {
                 <Input onChangeProp={setName} labelProp={'Nama'} placeholderProp={'cth: Sepatu Lari'} typeProp={'text'} inputId={'name'} valueProp={name} />
               </div>
               <div className="min-w-[270px] flex-1">
-                <Input onChangeProp={setMinStock} labelProp={'Min. Stock'} placeholderProp={'cth: 500'} typeProp={'number'} inputId={'min_stock'} valueProp={minStock} />
+                <Input onChangeProp={setMinStock} labelProp={'Min. Stock'} placeholderProp={'cth: 500'} typeProp={'number'} inputId={'min_stock'} valueProp={parseFloat(minStock)} />
               </div>
             </div>
             <div className="flex gap-8 items-center flex-wrap mb-8">
               <div className="min-w-[270px] flex-1">
-                <Input onChangeProp={setPrice} valueProp={price} labelProp={'Harga'} placeholderProp={'cth: 20000'} typeProp={'number'} inputId={'email'} />
+                <Input onChangeProp={setPrice} valueProp={parseFloat(price)} labelProp={'Harga'} placeholderProp={'cth: 20000'} typeProp={'number'} inputId={'email'} />
               </div>
               <div className="min-w-[270px] flex-1">
                 <Input onChangeProp={setUnit} valueProp={unit} labelProp={'Satuan'} placeholderProp={'cth: porsi, liter, gram'} typeProp={'text'} inputId={'email'} />
