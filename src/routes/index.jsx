@@ -24,6 +24,7 @@ import SaleDetail from "../pages/Sales/Detail";
 import PhysicalProductEdit from "../pages/PhysicalProduct/Catalog/Edit";
 import PhysicalProductPurchaseDetail from "../pages/PhysicalProduct/Purchase/Detail";
 import ServiceProductEdit from "../pages/ServicePorduct/Catalog/Edit";
+import SupplierEdit from "../pages/Supplier/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: 'supplier/add',
         element: <SupplierAdd />
+      },
+      {
+        path: 'supplier/:id',
+        element: <SupplierEdit />
       },
       {
         path: 'employee',
