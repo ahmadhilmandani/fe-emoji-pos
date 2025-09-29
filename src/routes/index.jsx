@@ -23,6 +23,7 @@ import HistorySaleIndex from "../pages/Sales/Index";
 import SaleDetail from "../pages/Sales/Detail";
 import PhysicalProductEdit from "../pages/PhysicalProduct/Catalog/Edit";
 import PhysicalProductPurchaseDetail from "../pages/PhysicalProduct/Purchase/Detail";
+import ServiceProductEdit from "../pages/ServicePorduct/Catalog/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: 'service-product/add',
         element: <ServiceProductAdd />
+      },
+      {
+        path: 'service-product/:id',
+        element: <ServiceProductEdit />
       },
       {
         path: 'supplier',
