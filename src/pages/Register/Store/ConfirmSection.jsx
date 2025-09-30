@@ -11,6 +11,7 @@ export default function RegisterConfirmSection() {
   const nameStore = useSelector((state) => state.registerStoreSlice.nameStore)
   const addressStore = useSelector((state) => state.registerStoreSlice.addressStore)
   const phoneStore = useSelector((state) => state.registerStoreSlice.phoneStore)
+  const emojiDiscount = useSelector((state) => state.registerStoreSlice.emojiDiscount)
 
   return (
     <>
@@ -60,6 +61,10 @@ export default function RegisterConfirmSection() {
           <div className="min-w-[280px] flex-1">
             <b>No. Hp</b>
             <div>{phoneStore}</div>
+          </div>
+          <div className="min-w-[280px] flex-1">
+            <b>Maks. Emoji Diskon</b>
+            <div>{emojiDiscount || 0}%</div>
           </div>
         </div>
       </div>

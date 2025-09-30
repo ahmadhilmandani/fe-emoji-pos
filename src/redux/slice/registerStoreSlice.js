@@ -12,6 +12,7 @@ export const registerStoreSlice = createSlice({
     nameStore: '',
     addressStore: '',
     phoneStore: '',
+    emojiDiscount: '',
   },
   reducers: {
     setName: (state, action) => {
@@ -41,10 +42,13 @@ export const registerStoreSlice = createSlice({
     setPhoneStore: (state, action) => {
       state.phoneStore = action.payload
     },
+    setEmojiDiscount: (state, action) => {
+      state.emojiDiscount = action.payload
+    },
   }
 })
 
 
-export const { setName, setEmail, setPassword, setAge, setSex, setPhone, setNameStore, setAddressStore, setPhoneStore } = registerStoreSlice.actions
+export const { setName, setEmail, setPassword, setAge, setSex, setPhone, setNameStore, setAddressStore, setPhoneStore, setEmojiDiscount } = registerStoreSlice.actions
 
 export default registerStoreSlice.reducer

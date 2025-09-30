@@ -27,6 +27,7 @@ export default function RegisterCard() {
   const nameStore = useSelector((state) => state.registerStoreSlice.nameStore)
   const addressStore = useSelector((state) => state.registerStoreSlice.addressStore)
   const phoneStore = useSelector((state) => state.registerStoreSlice.phoneStore)
+  const emojiDiscount = useSelector((state) => state.registerStoreSlice.emojiDiscount)
 
   const handlePrevStep = () => {
     if (stepNum != 1) {
@@ -68,6 +69,7 @@ export default function RegisterCard() {
         phone: phone || null,
         store_name: nameStore,
         store_address: addressStore,
+        percentage_max_emoji_disc: emojiDiscount,
         store_phone: phoneStore
       })
       toast.success('Berhasil Daftar, Silahkan Login!')

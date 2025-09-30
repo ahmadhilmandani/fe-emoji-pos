@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Input from "../../../components/Input";
-import { setAddressStore, setNameStore, setPhoneStore } from "../../../redux/slice/registerStoreSlice";
+import { setAddressStore, setNameStore, setPhoneStore, setEmojiDiscount } from "../../../redux/slice/registerStoreSlice";
 
 export default function RegisterStoreSection() {
 
@@ -9,6 +9,7 @@ export default function RegisterStoreSection() {
   const nameStore = useSelector((state) => state.registerStoreSlice.nameStore)
   const addressStore = useSelector((state) => state.registerStoreSlice.addressStore)
   const phoneStore = useSelector((state) => state.registerStoreSlice.phoneStore)
+  const emojiDiscount = useSelector((state) => state.registerStoreSlice.emojiDiscount)
 
 
   return (
@@ -23,8 +24,11 @@ export default function RegisterStoreSection() {
         <div className="min-w-[280px] flex-1">
           <Input valueProp={addressStore} labelProp='Alamat Toko' placeholderProp='Alamat Toko' typeProp='text' inputId='address' onChangeProp={(e) => { dispatch(setAddressStore(e)) }} />
         </div>
-        <div className="min-w-[280px] shrink-0 w-full">
+        <div className="min-w-[280px] shrink-0 flex-1">
           <Input valueProp={phoneStore} labelProp='No. Hp Toko' placeholderProp='No. Hp Toko' typeProp='text' inputId='phone_store' onChangeProp={(e) => { dispatch(setPhoneStore(e)) }} />
+        </div>
+        <div className="w-[160px] shrink-0">
+          <Input valueProp={emojiDiscount} labelProp='Maks. Emoji Diskon (%)' placeholderProp='Emoi Diskon' typeProp='number' inputId='phone_store' onChangeProp={(e) => { dispatch(setEmojiDiscount(e)) }} isRequired={false} />
         </div>
       </div>
     </>
