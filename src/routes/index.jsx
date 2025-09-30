@@ -25,6 +25,7 @@ import PhysicalProductEdit from "../pages/PhysicalProduct/Catalog/Edit";
 import PhysicalProductPurchaseDetail from "../pages/PhysicalProduct/Purchase/Detail";
 import ServiceProductEdit from "../pages/ServicePorduct/Catalog/Edit";
 import SupplierEdit from "../pages/Supplier/Edit";
+import ProcessedProductDetail from "../pages/ProcessedProduct/Catalog/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ export const router = createBrowserRouter([
         path: 'processed-product/add',
         element: <ProcessedProductAdd />
       },
+      {
+        path: 'processed-product/:id',
+        element: <ProcessedProductDetail />
+      },
+      // {
+      //   path: 'processed-product/edit/:id',
+      //   element: <ProcessedProductAdd />
+      // },
       {
         path: 'service-product',
         element: <ServiceProductIndex />
