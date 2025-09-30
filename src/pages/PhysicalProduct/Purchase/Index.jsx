@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getPurchase } from "../../../api/getPurchase";
 import { toast } from "react-toastify";
+import formatRupiah from "../../../utils/formatRupiah";
 
 export default function PurchasePhysicalProductIndex() {
   const navigate = useNavigate()
@@ -95,7 +96,7 @@ export default function PurchasePhysicalProductIndex() {
                         {val.supplier_phone}
                       </td>
                       <td className="px-6 py-4">
-                        Rp. {val.total_amount}
+                        Rp. {formatRupiah(parseFloat(val.total_amount))}
                       </td>
                       <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
                         <button onClick={()=>{navigate(`/purchase-physical-product/${val.id}`)}} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
