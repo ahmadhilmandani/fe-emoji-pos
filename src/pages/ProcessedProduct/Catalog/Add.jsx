@@ -70,7 +70,7 @@ export default function ProcessedProductAdd() {
       }
     })
     if (!isAlreadyChoose) {
-      setSelectedIngredients([...selectedIngredients, { id: id, name: name, qty: null, unit: unit, stockLeft }])
+      setSelectedIngredients([...selectedIngredients, { id: id, name: name, qty: 0, unit: unit, stockLeft }])
     }
   }
 

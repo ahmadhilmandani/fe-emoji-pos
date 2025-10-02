@@ -47,22 +47,22 @@ export default function ProcessedProductDetail() {
         }}>
           <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
         </div>
-        <h1>Tambah Produk Olahan</h1>
+        <h1>Detail Produk Olahan</h1>
       </header>
       <div>
         <Card isExtend={true}>
           <div className="flex gap-8 items-center flex-wrap mb-8">
             <div className="min-w-[270px] flex-1">
-              <Input onChangeProp={setName} labelProp={'Nama'} placeholderProp={'cth: Sepatu Lari'} typeProp={'text'} inputId={'email'} valueProp={name} />
+              <Input onChangeProp={setName} labelProp={'Nama'} isReadOnly={true} placeholderProp={'cth: Sepatu Lari'} typeProp={'text'} inputId={'email'} valueProp={name} />
             </div>
           </div>
           <div className="flex gap-8 items-center flex-wrap mb-8">
             <div className="min-w-[270px] flex-1">
-              <Input onChangeProp={setPrice} valueProp={price} labelProp={'Harga'} placeholderProp={'cth: 20000'} typeProp={'number'} inputId={'email'} />
+              <Input onChangeProp={setPrice} valueProp={price} isReadOnly={true} labelProp={'Harga'} placeholderProp={'cth: 20000'} typeProp={'number'} inputId={'email'} />
             </div>
 
             <div className="min-w-[270px] flex-1">
-              <Input onChangeProp={setUnit} valueProp={unit} labelProp={'Satuan'} placeholderProp={'cth: porsi, liter, gram'} typeProp={'text'} inputId={'email'} />
+              <Input onChangeProp={setUnit} valueProp={unit} isReadOnly={true} labelProp={'Satuan'} placeholderProp={'cth: porsi, liter, gram'} typeProp={'text'} inputId={'email'} />
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export default function ProcessedProductDetail() {
                 ingredients?.map((val, index) => {
                   return (
                     <>
-                      <div className="flex gap-8 items-end flex-wrap mb-8 pb-2 border-b border-gray-300">
+                      <div key={val.id} className="flex gap-8 items-end flex-wrap mb-8 pb-2 border-b border-gray-300">
                         <div className="max-w-[40px] flex-1 bg-amber- font-bold">
                           {1 + index}.
                         </div>
