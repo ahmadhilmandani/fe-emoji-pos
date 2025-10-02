@@ -49,7 +49,6 @@ export default function PhysicalProductEdit() {
       setPrice(res.data.product.price)
       setMinStock(res.data.product.phys_prod_min_stock)
       setUnit(res.data.product.unit)
-      setIsLoading(res.data.product.name)
     } catch (error) {
       toast.error(error.msg)
     } finally {
