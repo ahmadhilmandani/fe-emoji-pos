@@ -46,7 +46,7 @@ export default function Button({ onClickProp = () => { }, buttonType = BUTTON_TY
   else if (buttonType == BUTTON_TYPE.DANGER) {
     return (
       <>
-        <button onClick={onClickProp} type="button" className={`group flex justify-center items-center gap-3 text-danger-500 dark:text-danger-50 bg-danger-50 hover:bg-danger-100 font-semibold rounded-xl text-sm px-6 py-3 dark:bg-danger-700 dark:hover:bg-danger-600 ring-0 focus:outline-none transition-all ${isExtend && 'w-full'} ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        <button onClick={onClickProp} type="button" className={`group flex justify-center items-center gap-3 text-rose-500 bg-rose-50 hover:bg-rose-100 font-semibold rounded-xl text-sm px-6 py-3 ring-0 focus:outline-none transition-all ${isExtend && 'w-full'} ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
           {isLoading && <IconLoader2 className="animate-spin text-sm" />}
           {children}
         </button>
