@@ -28,6 +28,7 @@ import SupplierEdit from "../pages/Supplier/Edit";
 import ProcessedProductDetail from "../pages/ProcessedProduct/Catalog/Detail";
 import ProcessedProductEdit from "../pages/ProcessedProduct/Catalog/Edit";
 import IngredientEdit from "../pages/Ingredient/Edit";
+import PurchaseIngredientDetail from "../pages/Ingredient/Purchase/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ export const router = createBrowserRouter([
       {
         path: 'purchase-ingredient/add',
         element: <PurchaseIngredientAdd />
+      },
+      {
+        path: 'purchase-ingredient/:id',
+        element: <PurchaseIngredientDetail />
       },
       {
         path: 'sales',

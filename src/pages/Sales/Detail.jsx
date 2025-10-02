@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router"
-import { toast } from "react-toastify"
 import { getDetailSale } from "../../api/getDetailSale"
-import { IconChevronLeft, IconPlus } from "@tabler/icons-react"
+import { toast } from "react-toastify"
+import { useNavigate, useParams } from "react-router"
 import formatRupiah from "../../utils/formatRupiah"
+import { IconChevronLeft } from "@tabler/icons-react"
 
 export default function SaleDetail() {
   const [isLoading, setIsLoading] = useState(true)
