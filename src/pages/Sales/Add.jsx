@@ -375,13 +375,18 @@ export default function SaleAdd() {
                   {userInfoSlie.maxPercentageEmojiDiscount}
                 </div>
               </div>
-              <div className="flex justify-between gap-3 mb-3">
+              <div className="flex justify-between gap-3 mb-8">
                 <div className="text-gray-500/70">
                   Diskon Akhir
                 </div>
                 <div className="font-bold text-gray-500/70">
                   {nominalEmojiDiscount}
                 </div>
+              </div>
+                            <div className="my-8">
+                <button onClick={() => { setOpenModalEmojiPos(false) }} className="w-full flex-1 px-3 py-2 border border-gray-300 rounded-xl flex justify-center gap-1.5 items-center group hover:bg-rose-50 hover:cursor-pointer transition-all hover:border-rose-500">
+                  Tutup
+                </button>
               </div>
             </div>
           </Modal>
