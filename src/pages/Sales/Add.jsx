@@ -32,7 +32,7 @@ export default function SaleAdd() {
 
 
   const userInfoSlie = useSelector((state) => { return state.userInfoSlie })
-  
+
   const navigate = useNavigate()
 
   function togleSaleBtn(isShow, msg = '') {
@@ -260,16 +260,16 @@ export default function SaleAdd() {
   }, [])
 
   function dataURLtoBlob(dataURL) {
-  const arr = dataURL.split(",");
-  const mime = arr[0].match(/:(.*?);/)[1]; // "image/png"
-  const bstr = atob(arr[1]); // decode base64
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
+    const arr = dataURL.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1]; // "image/png"
+    const bstr = atob(arr[1]); // decode base64
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
   }
-  return new Blob([u8arr], { type: mime });
-}
 
   async function handleTakePhoto(paramDataUri) {
     setDataUri(paramDataUri)
@@ -281,7 +281,7 @@ export default function SaleAdd() {
       const res = await postPrediction('happy', file)
       setPercentageEmojiDiscount(parseFloat(res.data.probability))
       setNominalEmojiDiscount(parseFloat(res.data.probability) * parseFloat(userInfoSlie.maxPercentageEmojiDiscount))
-      
+
       setOpenCamera(false)
     } catch (error) {
       console.log(error)
@@ -296,13 +296,13 @@ export default function SaleAdd() {
 
   return (
     <>
-            {
-              isScreenLoading && <>
-                <div className="w-full h-screen fixed top-0 bottom-0 left-0 right-0 z-[20000000000000] bg-white/30 backdrop-blur-2xl flex justify-center items-center">
-                  <IconLoader2 className="animate-spin stroke-yellow-300" size={80} />
-                </div>
-              </>
-            }
+      {
+        isScreenLoading && <>
+          <div className="w-full h-screen fixed top-0 bottom-0 left-0 right-0 z-[20000000000000] bg-white/30 backdrop-blur-2xl flex justify-center items-center">
+            <IconLoader2 className="animate-spin stroke-yellow-300" size={80} />
+          </div>
+        </>
+      }
       {
         openCamera && (
           <>
@@ -383,7 +383,7 @@ export default function SaleAdd() {
                   {nominalEmojiDiscount}
                 </div>
               </div>
-                            <div className="my-8">
+              <div className="my-8">
                 <button onClick={() => { setOpenModalEmojiPos(false) }} className="w-full flex-1 px-3 py-2 border border-gray-300 rounded-xl flex justify-center gap-1.5 items-center group hover:bg-rose-50 hover:cursor-pointer transition-all hover:border-rose-500">
                   Tutup
                 </button>
