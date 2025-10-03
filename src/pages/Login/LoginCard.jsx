@@ -28,7 +28,8 @@ export default function LoginCard() {
         name: res.data.user.name,
         email: res.data.user.email,
         role: res.data.user.role,
-        storeId: res.data.user.store_id
+        storeId: res.data.user.store_id,
+        maxPercentageEmojiDiscount: res.data.user.percentage_max_emoji_disc
       }))
       navigate('/')
     } catch (error) {
