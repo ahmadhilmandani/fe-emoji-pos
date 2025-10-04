@@ -29,6 +29,7 @@ import ProcessedProductDetail from "../pages/ProcessedProduct/Catalog/Detail";
 import ProcessedProductEdit from "../pages/ProcessedProduct/Catalog/Edit";
 import IngredientEdit from "../pages/Ingredient/Edit";
 import PurchaseIngredientDetail from "../pages/Ingredient/Purchase/Detail";
+import EmployeeEdit from "../pages/Employee/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: 'employee/add',
         element: <EmployeeAdd />
+      },
+      {
+        path: 'employee/:id',
+        element: <EmployeeEdit />
       },
       {
         path: '/ingredient',

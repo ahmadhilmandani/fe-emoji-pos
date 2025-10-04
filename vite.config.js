@@ -4,6 +4,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '325d6d30dfb5.ngrok-free.app' // tambahkan host ini
+    ]
+  },
   plugins: [
     react(),
     tailwindcss(),
