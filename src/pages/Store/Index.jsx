@@ -6,11 +6,15 @@ import { IconChevronLeft, IconPencil, IconPlus } from "@tabler/icons-react"
 import formatRupiah from "../../utils/formatRupiah"
 import { getStore } from "../../api/getStore"
 import Button from "../../components/Button"
+import { useSelector } from "react-redux"
 
 
 export default function StoreIndex() {
   const [isLoading, setIsLoading] = useState(true)
   const [storeData, setStoreData] = useState()
+
+  const userInfoSlie = useSelector((state) => { return state.userInfoSlie })
+
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -68,11 +72,13 @@ export default function StoreIndex() {
         </div>
       </div>
       <div className="flex justify-end">
-        <Button onClickProp={()=>{navigate('/store/edit')}} buttonType="secondary">
-          <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-amber-800" stroke={1.6} size={19} />
-          Edit
-        </Button>
-
+        {userInfoSlie.role == 'owner' && (<>
+          <Button onClickProp={() => { navigate('/store/edit') }} buttonType="secondary">
+            <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-amber-800" stroke={1.6} size={19} />
+            Edit
+          </Button>
+        </>)
+        }
       </div>
     </div>
   )
