@@ -28,6 +28,7 @@ export default function SaleAdd() {
   const [openModalEmojiPos, setOpenModalEmojiPos] = useState(false)
   const [isScreenLoading, setIsScreenLoading] = useState(false)
   const [percentageEmojiDiscount, setPercentageEmojiDiscount] = useState()
+  const [finalPercentageEmoji, setFinalPercentageEmoji] = useState()
   const [nominalEmojiDiscount, setNominalEmojiDiscount] = useState()
 
 
@@ -243,12 +244,15 @@ export default function SaleAdd() {
       togleSaleBtn(true)
     }
 
+    setNominalEmojiDiscount((totalAmountTemp * finalPercentageEmoji))
+
   }, [undiscountTotal, regulerDiscount])
 
   useEffect(() => {
     if (totalAmount - paidAmount <= 0 && (totalAmount != 0)) {
       setChangeAmount(Math.abs(totalAmount - paidAmount))
       togleSaleBtn(true)
+
     } else {
       setChangeAmount(0)
       togleSaleBtn(false, 'Pilih 1 produk dan pembayaran harus Sama atau lebih dari total')
@@ -280,7 +284,8 @@ export default function SaleAdd() {
       const file = new File([blob], "photo.png", { type: blob.type })
       const res = await postPrediction('happy', file)
       setPercentageEmojiDiscount(parseFloat(res.data.probability))
-      setNominalEmojiDiscount(parseFloat(res.data.probability) * parseFloat(userInfoSlie.maxPercentageEmojiDiscount))
+      setFinalPercentageEmoji((parseFloat(res.data.probability) * parseFloat(userInfoSlie.maxPercentageEmojiDiscount)) / 100)
+      setNominalEmojiDiscount((totalAmount * finalPercentageEmoji) / 100)
 
       setOpenCamera(false)
     } catch (error) {
@@ -372,15 +377,15 @@ export default function SaleAdd() {
                   Max. Diskon Emoji
                 </div>
                 <div className="font-bold text-gray-500/70">
-                  {userInfoSlie.maxPercentageEmojiDiscount}
+                  {userInfoSlie.maxPercentageEmojiDiscount}%
                 </div>
               </div>
               <div className="flex justify-between gap-3 mb-8">
                 <div className="text-gray-500/70">
-                  Diskon Akhir
+                  Persentase Diskon
                 </div>
                 <div className="font-bold text-gray-500/70">
-                  {nominalEmojiDiscount}
+                  {finalPercentageEmoji}%
                 </div>
               </div>
               <div className="my-8">
@@ -634,7 +639,7 @@ export default function SaleAdd() {
                         </div>
                       </div>
                       <div className="font-bold text-gray-500/70">
-                        Rp. 0
+                        Rp. {nominalEmojiDiscount}
                       </div>
                     </div>
                   </div>
