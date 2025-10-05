@@ -43,7 +43,7 @@ export default function HistorySaleIndex() {
         </Button>
       </header>
       <div>
-        <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
+        {/* <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
           <div className="flex gap-1 items-stretch">
             <Input
               valueProp={''} placeholderProp={'cari berdasarkan nama'} typeProp={'text'} inputId={'cari'} onChangeProp={() => {
@@ -53,7 +53,7 @@ export default function HistorySaleIndex() {
               <IconSearch size={16} />
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
           <table className="min-w-[320px] w-full text-left rtl:text-right">
             <thead className="uppercase border-b border-gray-200">
@@ -112,7 +112,7 @@ export default function HistorySaleIndex() {
                       {val.final_total_amount ? formatRupiah(parseFloat(val.final_total_amount)) : 0}
                     </td>
                     <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
-                      <button onClick={()=>{navigate(`/history-sales/${val.id}`)}} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
+                      <button onClick={() => { navigate(`/history-sales/${val.id}`) }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:cursor-pointer transition-all hover:border-amber-500">
                         <IconEye className="group-hover:-translate-y-0.5 transition-all stroke-amber-500" stroke={1.2} size={22} />
                         Detail
                       </button>

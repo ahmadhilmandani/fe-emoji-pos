@@ -59,13 +59,13 @@ export default function ServiceProductIndex() {
         <div>
           <header className="flex justify-between items-center gap-5">
             <h1>Produk Layanan</h1>
-            {userRole == 'owner' &&            
-            <Button buttonType={'primary'} onClickProp={() => {
-              navigate('/service-product/add')
-            }}>
-              Tambah
-              <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
-            </Button>
+            {userRole == 'owner' &&
+              <Button buttonType={'primary'} onClickProp={() => {
+                navigate('/service-product/add')
+              }}>
+                Tambah
+                <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
+              </Button>
             }
           </header>
           <div>
@@ -112,16 +112,20 @@ export default function ServiceProductIndex() {
                           {val.unit}
                         </td>
                         <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
-                          <button onClick={() => { navigate(`/service-product/${val.id}`) }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:cursor-pointer transition-all hover:border-purple-500">
-                            <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-purple-500" stroke={1.2} size={22} />
-                            Edit
-                          </button>
-                          <button onClick={() => {
-                            handleToggleOpen(val)
-                          }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:cursor-pointer transition-all hover:border-rose-500">
-                            <IconEraser  className="group-hover:-translate-y-0.5 transition-all stroke-rose-500" stroke={1.2} size={22} />
-                            Hapus
-                          </button>
+                          {userRole == 'owner' && (
+                            <>
+                              <button onClick={() => { navigate(`/service-product/${val.id}`) }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:cursor-pointer transition-all hover:border-purple-500">
+                                <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-purple-500" stroke={1.2} size={22} />
+                                Edit
+                              </button>
+                              <button onClick={() => {
+                                handleToggleOpen(val)
+                              }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:cursor-pointer transition-all hover:border-rose-500">
+                                <IconEraser className="group-hover:-translate-y-0.5 transition-all stroke-rose-500" stroke={1.2} size={22} />
+                                Hapus
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     )
