@@ -14,7 +14,7 @@ export default function PhysicalProductIndex() {
   const [dataProducts, setDataProducts] = useState()
   const [productDataDelete, setProductDataDelete] = useState(null)
   const [isRefetch, setIsRefetch] = useState(true)
-  
+
 
   const navigate = useNavigate()
 
@@ -51,7 +51,7 @@ export default function PhysicalProductIndex() {
     return (
       <>
         {productDataDelete && (<>
-          <PhysicalProductModalDelete isRefetch={handleToggleRefetch} productData={productDataDelete} handleCloseModal={() => { handleToggleOpen(null)}} />
+          <PhysicalProductModalDelete isRefetch={handleToggleRefetch} productData={productDataDelete} handleCloseModal={() => { handleToggleOpen(null) }} />
         </>
         )
         }
