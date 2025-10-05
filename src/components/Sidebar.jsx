@@ -17,10 +17,10 @@ export default function Sidebar() {
     <aside className={`lg:w-[280px] sticky h-screen z-10 left-0 top-0 bottom-0 bg-white border border-gray-200 p-4`}>
       <img src={LogoPos} alt="" className="h-20 mb-3" />
       {/* dashboard */}
-      <NavLink to={'/'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
+      {/* <NavLink to={'/'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconLayoutDashboard />
         Dashboard
-      </NavLink>
+      </NavLink> */}
       <div className="mt-3">
         <div className="p-3 flex items-center gap-3 text-gray-500 group hover:bg-gray-100 hover:cursor-pointer transition-all" onClick={() => {
           setClickedState(clickedState == SIDEBAR_LIST.PRODUK_FISIK ? null : SIDEBAR_LIST.PRODUK_FISIK)
