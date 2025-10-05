@@ -64,7 +64,7 @@ export default function SupplierEdit() {
           }}>
             <IconChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-all" />
           </div>
-          <h1 className="mb-3">Edit Layanan</h1>
+          <h1 className="mb-3">Edit Supplier</h1>
         </div>
       </header>
       <div>
