@@ -97,6 +97,14 @@ export default function SaleDetail() {
                     <tr className="bg-white border-b border-gray-200 hover:bg-gray-50/50">
                       <td scope="row" className="pr-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {val.product_name}
+                        {val.item_is_delete == 1 ? (
+                          <>
+                            <div className="px-3 py-1 rounded-lg bg-rose-50 text-rose-700 font-semibol w-fit inline-block text-[12px] ml-3">
+                              Dihapus
+                            </div>
+                          </>
+                        ) : ''
+                        }
                       </td>
                       <td className="px-6 py-4">
                         Rp. {formatRupiah(parseFloat(val.price))}
