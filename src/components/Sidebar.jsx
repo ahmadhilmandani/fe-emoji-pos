@@ -126,14 +126,14 @@ export default function Sidebar() {
         </div>
       </div>
       {/* pengguna */}
-      <Link to={'/employee'} className="hover:bg-gray-100 transition-all flex gap-3 items-center p-3 text-gray-500">
+      <NavLink to={'/employee'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconUsers />
         Pengguna
-      </Link>
-      <Link to={'/employee'} className="hover:bg-gray-100 transition-all flex gap-3 items-center p-3 text-gray-500">
+      </NavLink>
+      <NavLink to={'/store'} className={({ isActive }) => (isActive ? "font-black text-yellow-600 flex gap-3 items-center p-3" : "rounded-xl flex gap-3 items-center p-3 transition-all hover:bg-gray-100 text-gray-500")}>
         <IconBuildingStore />
         Toko
-      </Link>
+      </NavLink>
     </aside>
   )
 }

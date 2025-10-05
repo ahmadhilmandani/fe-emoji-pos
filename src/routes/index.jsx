@@ -30,6 +30,8 @@ import ProcessedProductEdit from "../pages/ProcessedProduct/Catalog/Edit";
 import IngredientEdit from "../pages/Ingredient/Edit";
 import PurchaseIngredientDetail from "../pages/Ingredient/Purchase/Detail";
 import EmployeeEdit from "../pages/Employee/Edit";
+import StoreIndex from "../pages/Store/Index";
+import StoreEdit from "../pages/Store/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -151,6 +153,14 @@ export const router = createBrowserRouter([
       {
         path: 'history-sales/:id',
         element: <SaleDetail />
+      },
+      {
+        path: 'store',
+        element: <StoreIndex />
+      },
+      {
+        path: 'store/edit',
+        element: <StoreEdit />
       },
     ]
   },

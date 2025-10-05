@@ -1,144 +1,79 @@
-import { useNavigate } from "react-router"
-import Input from "../../components/Input"
-import Badge from "../../components/Badge"
-import Button from "../../components/Button"
-import { IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react"
-import { toast } from "react-toastify"
-import { getAllUserInfo } from "../../api/getAllUserInfo"
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router"
+import { toast } from "react-toastify"
+import { IconChevronLeft, IconPencil, IconPlus } from "@tabler/icons-react"
+import formatRupiah from "../../utils/formatRupiah"
+import { getStore } from "../../api/getStore"
+import Button from "../../components/Button"
 
-export default function EmployeeIndex() {
+
+export default function StoreIndex() {
   const [isLoading, setIsLoading] = useState(true)
-  const [dataUsersInfo, setDataUsersInfo] = useState()
+  const [storeData, setStoreData] = useState()
+
+  const { id } = useParams()
   const navigate = useNavigate()
 
-  const userInfoSlie = useSelector((state) => { return state.userInfoSlie })
-
-  const getAlltUserInfo = async () => {
+  const handleGetStore = async () => {
+    setIsLoading(true)
     try {
-      const res = await getAllUserInfo(userInfoSlie.storeId)
-      setDataUsersInfo(res.data.users_info)
+      const res = await getStore()
+      setStoreData(res.data.store[0])
+      console.log(res)
     } catch (error) {
-      toast.error(error.response.data.msg)
+      toast.error(error.msg)
     } finally {
       setIsLoading(false)
     }
   }
 
+
   useEffect(() => {
-    getAlltUserInfo()
+    handleGetStore()
   }, [])
 
+
   return (
-    <>
-      <div>
-        <header className="flex justify-between items-center gap-5">
-          <h1>Karyawan</h1>
-          <Button buttonType={'primary'} onClickProp={() => {
-            navigate('/employee/add')
-          }}>
-            Tambah
-            <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
-          </Button>
-        </header>
+    <div>
+      <header className="mb-8">
+        <div className="items-center gap-5">
+          <h1 className="mb-3">{storeData?.name}</h1>
+          <h4 className="mb-1 text-gray-400 font-normal">
+            Sejak: {storeData?.created_at}
+          </h4>
+        </div>
+      </header>
+      <div className="mb-5 bg-white border border-gray-200 p-5 rounded-lg flex justify-between gap-5 flex-wrap">
         <div>
-          <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
-            <div className="flex gap-1 items-stretch">
-              <Input
-                valueProp={''} placeholderProp={'cari berdasarkan nama'} typeProp={'text'} inputId={'cari'} onChangeProp={() => {
-                }} isRequired={false}
-              />
-              <div className="p-2.5 flex justify-center items-center aspect-square rounded-lg bg-yellow-300">
-                <IconSearch size={16} />
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <b>
-                Role
-              </b>
-              <Badge>
-                All
-              </Badge>
-              <Badge>
-                Admin
-              </Badge>
-              <Badge>
-                Kasir
-              </Badge>
-            </div>
+          <h4 className="mb-3 text-gray-400">Pemilik</h4>
+          <h3>{storeData?.owner_name}</h3>
+        </div>
+      </div>
+      <div className="mb-5 bg-white p-5 rounded-lg border border-gray-200">
+        <h4 className="mb-3">Informasi Lainnya</h4>
+        <div className="flex gap-8 flex-wrap items-center">
+          <div className="min-w-[240px] flex-1 border-b border-gray-200">
+            <h4 className="mb-1 text-gray-400">Alamat</h4>
+            <h4 className="mb-1">{storeData?.address}</h4>
           </div>
-          <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
-            <table className="min-w-[320px] w-full text-left rtl:text-right">
-              <thead className="uppercase border-b border-gray-200">
-                <tr>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Nama
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Email
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    No. Hp
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Role
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Umur
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    Gender
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-bold">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {dataUsersInfo?.map((val) => {
-                  return (
-                    <tr className="bg-white border-b border-gray-200 hover:bg-gray-50/60">
-                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {val.name}
-                      </th>
-                      <td className="px-6 py-4">
-                        {val.email}
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.phone}
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.user_role}
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.age} thn
-                      </td>
-                      <td className="px-6 py-4">
-                        {val.sex == 'L' ? 'Laki-laki' : 'Perempuan'}
-                      </td>
-                      <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
-                        <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-amber-50 hover:border-amber-500 hover:cursor-pointer transition-all">
-                          <IconEye className="group-hover:-translate-y-0.5 transition-all stroke-amber-500" stroke={1.2} size={22} />
-                          Detail
-                        </button>
-                        <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:border-purple-500 hover:cursor-pointer transition-all">
-                          <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-purple-500" stroke={1.2} size={22} />
-                          Edit
-                        </button>
-                        <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:border-rose-500 hover:cursor-pointer transition-all">
-                          <IconEraser className="group-hover:-translate-y-0.5 transition-all stroke-rose-500" stroke={1.2} size={22} />
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+          <div className="min-w-[240px] flex-1 border-b border-gray-200">
+            <h4 className="mb-1 text-gray-400">No. Hp Toko</h4>
+            <h4 className="mb-1">{storeData?.phone}</h4>
+          </div>
+          <div className="min-w-[240px] flex-1 border-b border-gray-200">
+            <h4 className="mb-1 text-gray-400">Maks. Emoji POS Diskon (%) </h4>
+            <h4 className="mb-1">{storeData?.percentage_max_emoji_disc}%</h4>
           </div>
         </div>
       </div>
-    </>
+      <div className="flex justify-end">
+        <Button onClickProp={()=>{navigate('/store/edit')}} buttonType="secondary">
+          <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-amber-800" stroke={1.6} size={19} />
+          Edit
+        </Button>
+
+      </div>
+    </div>
   )
 }
