@@ -2,18 +2,32 @@ import { useNavigate } from "react-router"
 import Input from "../../components/Input"
 import Badge from "../../components/Badge"
 import Button from "../../components/Button"
-import { IconEraser, IconEye, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react"
+import { IconEraser, IconPencil, IconPlus, IconSearch } from "@tabler/icons-react"
 import { toast } from "react-toastify"
 import { getAllUserInfo } from "../../api/getAllUserInfo"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import EmployeeModalDelete from "./Component/ModalDelete"
 
 export default function EmployeeIndex() {
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(true)
   const [dataUsersInfo, setDataUsersInfo] = useState()
+  const [deleteEmployee, setDeleteEmployee] = useState(null)
+  const [isRefetch, setIsRefetch] = useState(true)
+
+
   const navigate = useNavigate()
 
   const userInfoSlie = useSelector((state) => { return state.userInfoSlie })
+
+  const handleToggleOpen = (param) => {
+    setDeleteEmployee(param)
+  }
+
+  const handleToggleRefetch = (param) => {
+    setIsRefetch(param)
+  }
 
   const getAlltUserInfo = async () => {
     try {
@@ -23,15 +37,23 @@ export default function EmployeeIndex() {
       toast.error(error.response.data.msg)
     } finally {
       setIsLoading(false)
+      setIsRefetch(false)
     }
   }
 
   useEffect(() => {
-    getAlltUserInfo()
-  }, [])
+    if (isRefetch) {
+      getAlltUserInfo()
+    }
+  }, [isRefetch])
 
   return (
     <>
+      {deleteEmployee && (<>
+        <EmployeeModalDelete isRefetch={handleToggleRefetch} employeeData={deleteEmployee} handleCloseModal={() => { handleToggleOpen(null) }} />
+      </>
+      )
+      }
       <div>
         <header className="flex justify-between items-center gap-5">
           <h1>Karyawan</h1>
@@ -119,11 +141,13 @@ export default function EmployeeIndex() {
                       </td>
                       <td className="px-6 py-4 text-right relative flex items-center gap-3 flex-wrap">
                         {userInfoSlie.role === 'owner' ? (<>
-                          <button onClick={()=>{navigate(`/employee/${val.id}`)}} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:border-purple-500 hover:cursor-pointer transition-all">
+                          <button onClick={() => { navigate(`/employee/${val.id}`) }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-purple-50 hover:border-purple-500 hover:cursor-pointer transition-all">
                             <IconPencil className="group-hover:-translate-y-0.5 transition-all stroke-purple-500" stroke={1.2} size={22} />
                             Edit
                           </button>
-                          <button className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:border-rose-500 hover:cursor-pointer transition-all">
+                          <button onClick={() => {
+                            handleToggleOpen(val)
+                          }} className="px-3 py-2 border border-gray-300 rounded-xl flex gap-1.5 items-center group hover:bg-rose-50 hover:border-rose-500 hover:cursor-pointer transition-all">
                             <IconEraser className="group-hover:-translate-y-0.5 transition-all stroke-rose-500" stroke={1.2} size={22} />
                             Hapus
                           </button>
