@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getProduct } from "../../../api/getProduct";
 import { toast } from "react-toastify";
 import ServiceProductModalDelete from "../Component/ModalDelete";
+import { useSelector } from "react-redux";
 // import PhysicalProductIndexLoading from "../Component/IndexLoading";
 
 export default function ServiceProductIndex() {
@@ -13,6 +14,9 @@ export default function ServiceProductIndex() {
   const [dataProducts, setDataProducts] = useState()
   const [productDataDelete, setProductDataDelete] = useState(null)
   const [isRefetch, setIsRefetch] = useState(true)
+
+  const userRole = useSelector((state) => state.userInfoSlie.role)
+
 
   const navigate = useNavigate()
 
@@ -55,12 +59,14 @@ export default function ServiceProductIndex() {
         <div>
           <header className="flex justify-between items-center gap-5">
             <h1>Produk Layanan</h1>
+            {userRole == 'owner' &&            
             <Button buttonType={'primary'} onClickProp={() => {
               navigate('/service-product/add')
             }}>
               Tambah
               <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
             </Button>
+            }
           </header>
           <div>
             <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">

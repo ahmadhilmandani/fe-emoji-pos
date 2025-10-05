@@ -7,12 +7,17 @@ import { useEffect, useState } from "react";
 import { getSupplier } from "../../api/getSupplier";
 import { toast } from "react-toastify";
 import SupplierModalDelete from "./Component/ModalDelete";
+import { useSelector } from "react-redux";
 
 export default function SupplierIndex() {
   const [isLoading, setIsLoading] = useState(true)
   const [supplierData, setSupplierData] = useState()
   const [supplierDelete, setSupplierDelete] = useState(null)
   const [isRefetch, setIsRefetch] = useState(true)
+
+  const userRole = useSelector((state) => state.userInfoSlie.role)
+
+
   const navigate = useNavigate()
 
   const handleToggleOpen = (productData) => {
@@ -53,12 +58,15 @@ export default function SupplierIndex() {
       <div>
         <header className="flex justify-between items-center gap-5">
           <h1>Supplier</h1>
+
+          {userRole === 'owner' &&
           <Button buttonType={'primary'} onClickProp={() => {
             navigate('/supplier/add')
           }}>
             Tambah
             <IconPlus size={16} className="group-hover:translate-x-0.5 transition-all" />
           </Button>
+          }
         </header>
         <div>
           <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">

@@ -32,47 +32,74 @@ import PurchaseIngredientDetail from "../pages/Ingredient/Purchase/Detail";
 import EmployeeEdit from "../pages/Employee/Edit";
 import StoreIndex from "../pages/Store/Index";
 import StoreEdit from "../pages/Store/Edit";
+import ProtectedRoute from "../components/ProtectedRoute";
+
 
 export const router = createBrowserRouter([
   {
     path: '/',
     Component: MainLayout,
     children: [
-      // {
-      //   index: true,
-      //   element: <ProductIndex />
-      // },
+      // Physical Product
       {
         path: 'physical-product',
         element: <PhysicalProductIndex />
       },
       {
         path: 'physical-product/add',
-        element: <PhysicalProductAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <PhysicalProductAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'physical-product/edit/:id',
-        element: <PhysicalProductEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <PhysicalProductEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Purchase Physical Product (owner + admin)
       {
         path: 'purchase-physical-product',
-        element: <PurchasePhysicalProductIndex />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PurchasePhysicalProductIndex />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'purchase-physical-product/add',
-        element: <PurchasePhysicalProductAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PurchasePhysicalProductAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'purchase-physical-product/:id',
-        element: <PhysicalProductPurchaseDetail />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PhysicalProductPurchaseDetail />
+          </ProtectedRoute>
+        )
       },
+
+      // Processed Product
       {
         path: 'processed-product',
         element: <ProcessedProductIndex />
       },
       {
         path: 'processed-product/add',
-        element: <ProcessedProductAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <ProcessedProductAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'processed-product/:id',
@@ -80,68 +107,132 @@ export const router = createBrowserRouter([
       },
       {
         path: 'processed-product/edit/:id',
-        element: <ProcessedProductEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <ProcessedProductEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Service Product
       {
         path: 'service-product',
         element: <ServiceProductIndex />
       },
       {
         path: 'service-product/add',
-        element: <ServiceProductAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <ServiceProductAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'service-product/:id',
-        element: <ServiceProductEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <ServiceProductEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Supplier
       {
         path: 'supplier',
         element: <SupplierIndex />
       },
       {
         path: 'supplier/add',
-        element: <SupplierAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <SupplierAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'supplier/:id',
-        element: <SupplierEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <SupplierEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Employee (full CRUD hanya owner)
       {
         path: 'employee',
-        element: <EmployeeIndex />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <EmployeeIndex />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'employee/add',
-        element: <EmployeeAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <EmployeeAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'employee/:id',
-        element: <EmployeeEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <EmployeeEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Ingredient
       {
-        path: '/ingredient',
+        path: 'ingredient',
         element: <IndgredientIndex />
       },
       {
-        path: '/ingredient/add',
-        element: <IngredientAdd />
+        path: 'ingredient/add',
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <IngredientAdd />
+          </ProtectedRoute>
+        )
       },
       {
-        path: '/ingredient/edit/:id',
-        element: <IngredientEdit />
+        path: 'ingredient/edit/:id',
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <IngredientEdit />
+          </ProtectedRoute>
+        )
       },
+
+      // Purchase Ingredient (owner + admin)
       {
         path: 'purchase-ingredient',
-        element: <PurchaseIngredientIndex />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PurchaseIngredientIndex />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'purchase-ingredient/add',
-        element: <PurchaseIngredientAdd />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PurchaseIngredientAdd />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'purchase-ingredient/:id',
-        element: <PurchaseIngredientDetail />
+        element: (
+          <ProtectedRoute allowedRoles={['owner','admin']}>
+            <PurchaseIngredientDetail />
+          </ProtectedRoute>
+        )
       },
+
+      // Sales (bisa diakses kasir juga)
       {
         path: 'sales',
         element: <SaleAdd />
@@ -154,13 +245,23 @@ export const router = createBrowserRouter([
         path: 'history-sales/:id',
         element: <SaleDetail />
       },
+
+      // Store (hanya owner)
       {
         path: 'store',
-        element: <StoreIndex />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <StoreIndex />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'store/edit',
-        element: <StoreEdit />
+        element: (
+          <ProtectedRoute allowedRoles={['owner']}>
+            <StoreEdit />
+          </ProtectedRoute>
+        )
       },
     ]
   },
