@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 export default function ProtectedRoute({ children, allowedRoles }) {
   const user = useSelector((state) => state.userInfoSlie);
+  // const token = localStorage.getItem('token')
 
   if (!user) {
     return <Navigate to="/login" replace />;
