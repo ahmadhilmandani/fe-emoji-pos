@@ -414,7 +414,7 @@ export default function SaleAdd() {
                 <div className="size-24"></div>
                 <div>
                   <div className="text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, perspiciatis. Recusandae earum explicabo sit id consectetur quidem repellendus sequi expedita! Veniam numquam a doloremque placeat laboriosam pariatur corrupti ullam obcaecati.
+                    Halaman penjualan menampilkan daftar transaksi penjualan yang tercatat secara real-time, lengkap dengan detail produk, jumlah, dan total harga. Fitur ini membantu memantau aktivitas penjualan serta memudahkan pengelolaan laporan secara efisien.
                   </div>
                 </div>
               </div>

@@ -69,7 +69,7 @@ export default function ServiceProductIndex() {
             }
           </header>
           <div>
-            <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
+            {/* <div className="flex justify-between items-center gap-5 bg-white p-5 rounded-t-lg border border-b-2 border-b-yellow-300 border-gray-200">
               <div className="flex gap-1 items-stretch">
                 <Input
                   valueProp={''} placeholderProp={'cari berdasarkan nama'} typeProp={'text'} inputId={'cari'} onChangeProp={() => {
@@ -79,7 +79,7 @@ export default function ServiceProductIndex() {
                   <IconSearch size={16} />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="w-full overflow-x-auto relative rounded-b-lg border border-gray-200 bg-white">
               <table className="min-w-[320px] w-full text-left rtl:text-right">
                 <thead className="uppercase border-b border-gray-200">

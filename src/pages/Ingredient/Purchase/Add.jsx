@@ -146,7 +146,7 @@ export default function PurchaseIngredientAdd() {
           <div className="size-10"></div>
           <div>
             <div className="text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, perspiciatis. Recusandae earum explicabo sit id consectetur quidem repellendus sequi expedita! Veniam numquam a doloremque placeat laboriosam pariatur corrupti ullam obcaecati.
+              Halaman pembelian bahan baku menampilkan daftar kebutuhan produksi yang dapat dipilih dan dipesan sesuai jumlah yang dibutuhkan. Fitur ini memudahkan pencatatan transaksi serta memastikan ketersediaan bahan baku selalu terkontrol.
             </div>
           </div>
         </div>

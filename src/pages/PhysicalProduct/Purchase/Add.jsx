@@ -146,7 +146,7 @@ export default function PurchasePhysicalProductAdd() {
           <div className="size-10"></div>
           <div>
             <div className="text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, perspiciatis. Recusandae earum explicabo sit id consectetur quidem repellendus sequi expedita! Veniam numquam a doloremque placeat laboriosam pariatur corrupti ullam obcaecati.
+              Halaman pembelian produk fisik menampilkan katalog produk lengkap dengan detail harga, stok, dan opsi jumlah pembelian. Pengguna dapat dengan mudah memilih produk yang diinginkan serta menyelesaikan transaksi secara cepat dan praktis.
             </div>
           </div>
         </div>
